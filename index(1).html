@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0b0b">
+<title>Smart Dating Europe — знакомства со смыслом</title>
+<style>
+:root{--bg:#090909;--panel:#141414;--panel2:#1c1b18;--gold:#d6b15e;--gold2:#f2d88d;--muted:#aaa49a;--line:#383126;--white:#f7f3e9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#3a2c12 0,#111 36%,#080808 75%);color:var(--white);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;background:#090909eF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800;letter-spacing:.08em;color:var(--gold2);font-size:18px}.brand span{display:block;color:#aaa;font-size:10px;letter-spacing:.28em;font-weight:500}
+nav{display:flex;gap:18px;align-items:center}nav a{color:#ddd;text-decoration:none;font-size:14px}nav a:hover{color:var(--gold2)}
+.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#f1d58a,#b98b36);color:#17120a;border-radius:999px;padding:11px 19px;font-weight:750;box-shadow:0 5px 22px #d6b15e22}.btn.ghost{background:transparent;color:var(--gold2);box-shadow:none}.btn.small{padding:8px 14px;font-size:13px}
+.hero{padding:76px 0 58px;text-align:center}.eyebrow{color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font-size:11px;font-weight:700}.hero h1{font:500 clamp(38px,7vw,72px)/1.06 Georgia,serif;margin:18px auto;max-width:850px}.hero h1 em{color:var(--gold2);font-style:normal}.hero p{color:#c5beb0;max-width:620px;margin:0 auto 26px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.section{padding:48px 0}.section h2{font:500 36px Georgia,serif;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(150deg,#1c1a16,#111);border:1px solid var(--line);border-radius:18px;overflow:hidden}.portrait{height:210px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#78603a,#302416 55%,#17130e);font-size:64px}.cardbody{padding:17px}.card h3{margin:0 0 4px;font-size:19px}.meta{color:var(--gold2);font-size:13px}.card p{color:#bcb5a8;font-size:14px;min-height:42px}.cardfoot{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel{background:#121212;border:1px solid var(--line);border-radius:18px;padding:24px}.filters{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#090909;border:1px solid #51442c;color:white;border-radius:10px;padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:13px;margin-top:45px}.modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;padding:18px;z-index:10}.modal.open{display:grid}.dialog{width:min(460px,100%);background:#171613;border:1px solid var(--gold);border-radius:18px;padding:24px;max-height:90vh;overflow:auto}.dialog h2{font:28px Georgia,serif;margin:0 0 16px}.dialog .field{margin:12px 0}.dialog .btn{width:100%;margin-top:10px}.close{float:right;background:none;border:0;color:#ddd;font-size:24px}.notice{color:#bfb6a4;font-size:12px;margin-top:12px}.status{color:var(--gold2);min-height:22px;font-size:13px;margin-top:8px}
+@media(max-width:760px){nav{display:none}.grid{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.hero{padding:55px 0 38px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.portrait{height:190px}.section h2{font-size:30px}.filters{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div>
+  <nav><a href="#how">О проекте</a><a href="#people">Анкеты</a><a href="#search">Поиск</a></nav>
+  <button class="btn small" id="openAuth">Войти</button>
+</div></header>
+<main>
+<section class="hero wrap">
+  <div class="eyebrow">Европа начинается со знакомства</div>
+  <h1>Встречайте людей.<br><em>Находите своё.</em></h1>
+  <p>Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.</p>
+  <div class="actions"><button class="btn" id="openRegister">Создать анкету</button><a class="btn ghost" href="#people">Смотреть анкеты</a></div>
+</section>
+<section class="section wrap" id="how">
+  <div class="eyebrow">Smart Dating Europe</div><h2>Знакомства без границ</h2>
+  <p class="sub">Красивое пространство для настоящего общения.</p>
+  <div class="panel"><p style="margin:0;color:#c9c0b0">Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.</p></div>
+</section>
+<section class="section wrap" id="search">
+  <h2>Найти знакомство</h2><p class="sub">Настройте поиск по интересам и месту проживания.</p>
+  <div class="panel filters">
+    <div class="field"><label>Кого ищете</label><select id="gender"><option value="">Не важно</option><option>Женщину</option><option>Мужчину</option></select></div>
+    <div class="field"><label>Возраст от</label><input id="ageFrom" type="number" min="18" max="99" placeholder="18"></div>
+    <div class="field"><label>Страна</label><input id="country" placeholder="Например, Швейцария"></div>
+    <button class="btn" id="filterBtn">Найти</button>
+  </div>
+</section>
+<section class="section wrap" id="people">
+  <h2>Участники</h2><p class="sub">Примеры оформления анкет — реальные анкеты появятся после подключения базы данных.</p>
+  <div class="grid" id="profiles">
+    <article class="card"><div class="portrait">✦</div><div class="cardbody"><h3>Анкета-пример</h3><div class="meta">Европа · 18+</div><p>Здесь будет короткое описание участника.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
+    <article class="card"><div class="portrait">❖</div><div class="cardbody"><h3>Ваше знакомство</h3><div class="meta">Ваш город</div><p>После регистрации здесь будут отображаться анкеты.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
+    <article class="card"><div class="portrait">✧</div><div class="cardbody"><h3>Новые встречи</h3><div class="meta">Новые люди</div><p>Поиск и фильтры заработают после настройки базы.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">© 2026 Smart Dating Europe · Уважение, безопасность и взаимность.</div></footer>
+
+<div class="modal" id="authModal"><div class="dialog">
+<button class="close" id="closeAuth" aria-label="Закрыть">×</button><h2 id="modalTitle">Войти</h2>
+<form id="authForm">
+<div class="field"><label>Email</label><input id="email" type="email" required placeholder="you@example.com"></div>
+<div class="field"><label>Пароль</label><input id="password" type="password" required minlength="6" placeholder="Не менее 6 символов"></div>
+<button class="btn" type="submit" id="authSubmit">Войти</button>
+</form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px">Создать аккаунт</button>
+<div class="status" id="authStatus"></div>
+<div class="notice">Пока демонстрационный интерфейс. Для настоящего входа подключите Supabase и настройте таблицы по файлу schema.sql.</div>
+</div></div>
+<script>
+const modal=document.getElementById('authModal');let mode='login';
+function showAuth(m){mode=m;document.getElementById('modalTitle').textContent=m==='login'?'Войти':'Создать аккаунт';document.getElementById('authSubmit').textContent=m==='login'?'Войти':'Зарегистрироваться';document.getElementById('switchMode').textContent=m==='login'?'Создать аккаунт':'Уже есть аккаунт? Войти';document.getElementById('authStatus').textContent='';modal.classList.add('open')}
+document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
+document.getElementById('authForm').onsubmit=e=>{e.preventDefault();document.getElementById('authStatus').textContent='Интерфейс готов. Для реальной регистрации сначала подключите Supabase (см. README).';};
+document.getElementById('filterBtn').onclick=()=>{document.getElementById('profiles').scrollIntoView({behavior:'smooth'});alert('Поиск станет активным после подключения базы данных.');};
+</script>
+</body></html>
