@@ -1,192 +1,47 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b0b0b">
-<title>Smart Dating Europe — Find Your Love</title>
-
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0b"><title>Smart Dating Europe — Find Your Love</title>
 <style>
 :root{--bg:#090909;--panel:#141414;--panel2:#1c1b18;--gold:#d6b15e;--gold2:#f2d88d;--muted:#aaa49a;--line:#383126;--white:#f7f3e9}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#3a2c12 0,#111 36%,#080808 75%);color:var(--white);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 20px}
-header{position:sticky;top:0;z-index:5;background:#090909eF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
-.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:800;letter-spacing:.08em;color:var(--gold2);font-size:18px}.brand span{display:block;color:#aaa;font-size:10px;letter-spacing:.28em;font-weight:500}
+header{position:sticky;top:0;z-index:5;background:#090909ef;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}.brand{font-weight:800;letter-spacing:.08em;color:var(--gold2);font-size:18px}.brand span{display:block;color:#aaa;font-size:10px;letter-spacing:.28em;font-weight:500}
 nav{display:flex;gap:18px;align-items:center}nav a{color:#ddd;text-decoration:none;font-size:14px}nav a:hover{color:var(--gold2)}
-.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#f1d58a,#b98b36);color:#17120a;border-radius:999px;padding:11px 19px;font-weight:750;box-shadow:0 5px 22px #d6b15e22}.btn.ghost{background:transparent;color:var(--gold2);box-shadow:none}.btn.small{padding:8px 14px;font-size:13px}
+#language{background:#171613;color:var(--white);border:1px solid var(--gold);border-radius:8px;padding:8px}
+.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#f1d58a,#b98b36);color:#17120a;border-radius:999px;padding:11px 19px;font-weight:750;box-shadow:0 5px 22px #d6b15e22}.btn.ghost{background:transparent;color:var(--gold2);box-shadow:none}.btn.small{padding:8px 14px;font-size:13px}.btn:disabled{opacity:.55;cursor:not-allowed}
 .hero{padding:76px 0 58px;text-align:center}.eyebrow{color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font-size:11px;font-weight:700}.hero h1{font:500 clamp(38px,7vw,72px)/1.06 Georgia,serif;margin:18px auto;max-width:850px}.hero h1 em{color:var(--gold2);font-style:normal}.hero p{color:#c5beb0;max-width:620px;margin:0 auto 26px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 .section{padding:48px 0}.section h2{font:500 36px Georgia,serif;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(150deg,#1c1a16,#111);border:1px solid var(--line);border-radius:18px;overflow:hidden}.portrait{height:210px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#78603a,#302416 55%,#17130e);font-size:64px}.cardbody{padding:17px}.card h3{margin:0 0 4px;font-size:19px}.meta{color:var(--gold2);font-size:13px}.card p{color:#bcb5a8;font-size:14px;min-height:42px}.cardfoot{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.panel{background:#121212;border:1px solid var(--line);border-radius:18px;padding:24px}.filters{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#090909;border:1px solid #51442c;color:white;border-radius:10px;padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}
+.panel{background:#121212;border:1px solid var(--line);border-radius:18px;padding:24px}.filters{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;align-items:end}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#090909;border:1px solid #51442c;color:white;border-radius:10px;padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}
 footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:13px;margin-top:45px}.modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;padding:18px;z-index:10}.modal.open{display:grid}.dialog{width:min(460px,100%);background:#171613;border:1px solid var(--gold);border-radius:18px;padding:24px;max-height:90vh;overflow:auto}.dialog h2{font:28px Georgia,serif;margin:0 0 16px}.dialog .field{margin:12px 0}.dialog .btn{width:100%;margin-top:10px}.close{float:right;background:none;border:0;color:#ddd;font-size:24px}.notice{color:#bfb6a4;font-size:12px;margin-top:12px}.status{color:var(--gold2);min-height:22px;font-size:13px;margin-top:8px}
 @media(max-width:760px){nav{display:none}.grid{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.hero{padding:55px 0 38px}}
-@media(max-width:480px){.grid{grid-template-columns:1fr}.portrait{height:190px}.section h2{font-size:30px}.filters{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<header><div class="wrap nav">
-  <div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div>
-  <nav><a href="#how">О проекте</a><a href="#people">Анкеты</a><a href="#search">Поиск</a></nav>
-  <select id="language" aria-label="Language"><option value="en">English</option><option value="ru">Русский</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select>
-  <button class="btn small" id="openAuth">Войти</button>
-</div></header>
-<main>
-<section class="hero wrap">
-  <div class="eyebrow">Европа начинается со знакомства</div>
-  <h1>Встречайте людей.<br><em>Находите своё.</em></h1>
-  <p>Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.</p>
-  <div class="actions"><button class="btn" id="openRegister">Создать анкету</button><a class="btn ghost" href="#people">Смотреть анкеты</a></div>
-</section>
-<section class="section wrap" id="how">
-  <div class="eyebrow">Smart Dating Europe</div><h2>Знакомства без границ</h2>
-  <p class="sub">Красивое пространство для настоящего общения.</p>
-  <div class="panel"><p style="margin:0;color:#c9c0b0">Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.</p></div>
-</section>
-<section class="section wrap" id="search">
-  <h2>Найти знакомство</h2><p class="sub">Настройте поиск по интересам и месту проживания.</p>
-  <div class="panel filters">
-    <div class="field"><label>Кого ищете</label><select id="gender"><option value="">Не важно</option><option>Женщину</option><option>Мужчину</option></select></div>
-    <div class="field"><label>Возраст от</label><input id="ageFrom" type="number" min="18" max="99" placeholder="18"></div>
-    <div class="field"><label>Страна</label><input id="country" placeholder="Например, Швейцария"></div>
-    <button class="btn" id="filterBtn">Найти</button>
-  </div>
-</section>
-<section class="section wrap" id="people">
-  <h2>Участники</h2><p class="sub">Примеры оформления анкет — реальные анкеты появятся после подключения базы данных.</p>
-  <div class="grid" id="profiles">
-    <article class="card"><div class="portrait">✦</div><div class="cardbody"><h3>Анкета-пример</h3><div class="meta">Европа · 18+</div><p>Здесь будет короткое описание участника.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
-    <article class="card"><div class="portrait">❖</div><div class="cardbody"><h3>Ваше знакомство</h3><div class="meta">Ваш город</div><p>После регистрации здесь будут отображаться анкеты.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
-    <article class="card"><div class="portrait">✧</div><div class="cardbody"><h3>Новые встречи</h3><div class="meta">Новые люди</div><p>Поиск и фильтры заработают после настройки базы.</p><div class="cardfoot"><span class="meta">Демо-профиль</span><button class="btn small ghost" disabled>♡ Симпатия</button></div></div></article>
-  </div>
-</section>
-</main>
-<footer><div class="wrap">© 2026 Smart Dating Europe · Уважение, безопасность и взаимность.</div></footer>
-
-<div class="modal" id="authModal"><div class="dialog">
-<button class="close" id="closeAuth" aria-label="Закрыть">×</button><h2 id="modalTitle">Войти</h2>
-<form id="authForm">
-<div class="field"><label>Email</label><input id="email" type="email" required placeholder="you@example.com"></div>
-<div class="field"><label>Пароль</label><input id="password" type="password" required minlength="6" placeholder="Не менее 6 символов"></div>
-<button class="btn" type="submit" id="authSubmit">Войти</button>
-</form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px">Создать аккаунт</button>
-<div class="status" id="authStatus"></div>
-<div class="notice">Пока демонстрационный интерфейс. Для настоящего входа подключите Supabase и настройте таблицы по файлу schema.sql.</div>
-</div></div>
+@media(max-width:480px){.grid{grid-template-columns:1fr}.portrait{height:190px}.section h2{font-size:30px}.filters{grid-template-columns:1fr}.brand{font-size:14px}}
+</style></head><body>
+<header><div class="wrap nav"><div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div><nav><a href="#how" data-i="navAbout"></a><a href="#people" data-i="navProfiles"></a><a href="#search" data-i="navSearch"></a></nav><select id="language" aria-label="Language"><option value="en">English</option><option value="ru">Русский</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select><button class="btn small" id="openAuth" data-i="login"></button></div></header>
+<main><section class="hero wrap"><div class="eyebrow" data-i="eyebrow"></div><h1><span data-i="hero1"></span><br><em data-i="hero2"></em></h1><p data-i="heroDescription"></p><div class="actions"><button class="btn" id="openRegister" data-i="createProfile"></button><a class="btn ghost" href="#people" data-i="browse"></a></div></section>
+<section class="section wrap" id="how"><div class="eyebrow">Smart Dating Europe</div><h2 data-i="withoutBorders"></h2><p class="sub" data-i="welcome"></p><div class="panel"><p style="margin:0;color:#c9c0b0" data-i="respect"></p></div></section>
+<section class="section wrap" id="search"><h2 data-i="findMatch"></h2><p class="sub" data-i="searchIntro"></p><div class="panel filters"><div class="field"><label for="gender" data-i="who"></label><select id="gender"><option value="" data-i="any"></option><option value="woman" data-i="woman"></option><option value="man" data-i="man"></option></select></div><div class="field"><label for="ageFrom" data-i="age"></label><input id="ageFrom" type="number" min="18" max="99" placeholder="18"></div><div class="field"><label for="country" data-i="country"></label><input id="country" data-placeholder="countryExample"></div><button class="btn" id="filterBtn" data-i="search"></button></div></section>
+<section class="section wrap" id="people"><h2 data-i="members"></h2><p class="sub" data-i="membersIntro"></p><div class="grid" id="profiles">
+<article class="card"><div class="portrait">✦</div><div class="cardbody"><h3 data-i="exampleProfile"></h3><div class="meta" data-i="europe18"></div><p data-i="exampleDescription"></p><div class="cardfoot"><span class="meta" data-i="demo"></span><button class="btn small ghost" disabled data-i="like"></button></div></div></article>
+<article class="card"><div class="portrait">❖</div><div class="cardbody"><h3 data-i="yourMatch"></h3><div class="meta" data-i="yourCity"></div><p data-i="afterRegistration"></p><div class="cardfoot"><span class="meta" data-i="demo"></span><button class="btn small ghost" disabled data-i="like"></button></div></div></article>
+<article class="card"><div class="portrait">✧</div><div class="cardbody"><h3 data-i="newMeetings"></h3><div class="meta" data-i="newPeople"></div><p data-i="filtersLater"></p><div class="cardfoot"><span class="meta" data-i="demo"></span><button class="btn small ghost" disabled data-i="like"></button></div></div></article>
+</div></section></main><footer><div class="wrap">© 2026 Smart Dating Europe · <span data-i="footer"></span></div></footer>
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
 <script>
-const modal=document.getElementById('authModal');let mode='login';
-function showAuth(m){mode=m;document.getElementById('modalTitle').textContent=m==='login'?'Войти':'Создать аккаунт';document.getElementById('authSubmit').textContent=m==='login'?'Войти':'Зарегистрироваться';document.getElementById('switchMode').textContent=m==='login'?'Создать аккаунт':'Уже есть аккаунт? Войти';document.getElementById('authStatus').textContent='';modal.classList.add('open')}
-document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
-document.getElementById('authForm').onsubmit=e=>{e.preventDefault();document.getElementById('authStatus').textContent='Интерфейс готов. Для реальной регистрации сначала подключите Supabase (см. README).';};
-document.getElementById('filterBtn').onclick=()=>{document.getElementById('profiles').scrollIntoView({behavior:'smooth'});alert('Поиск станет активным после подключения базы данных.');};
-</script>
-<script>
-(() => {
-  const language = document.getElementById('language');
-  if (!language) return;
-
-  const translations = {
-    en: ['About us', 'How it works', 'Sign in', 'Europe is where it begins', 'Meet people.', 'Find your love.', 'Email', 'Password', 'Demo interface only'],
-    ru: ['О проекте', 'Как это работает', 'Войти', 'Европа начинается со знакомств', 'Встречайте людей.', 'Находите свою любовь.', 'Email', 'Пароль', 'Пока демонстрационный интерфейс'],
-    fr: ['À propos', 'Comment ça marche', 'Connexion', 'Tout commence en Europe', 'Faites des rencontres.', 'Trouvez l’amour.', 'E-mail', 'Mot de passe', 'Interface de démonstration'],
-    de: ['Über uns', 'So funktioniert es', 'Anmelden', 'In Europa beginnt alles', 'Menschen kennenlernen.', 'Liebe finden.', 'E-Mail', 'Passwort', 'Demo-Oberfläche'],
-    it: ['Chi siamo', 'Come funziona', 'Accedi', 'Tutto inizia in Europa', 'Incontra persone.', 'Trova l’amore.', 'Email', 'Password', 'Interfaccia dimostrativa']
-  };
-
-  const originals = translations.ru;
-  const textNodes = [];
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    if (node.parentElement.closest('script, style, select, option')) continue;
-    const original = node.nodeValue;
-    const index = originals.findIndex(t => original.trim() === t);
-    if (index !== -1) textNodes.push({ node, original, index });
-  }
-
-  function applyLanguage(lang) {
-    const words = translations[lang] || translations.en;
-    document.documentElement.lang = lang;
-    textNodes.forEach(({node, original, index}) => {
-      node.nodeValue = original.replace(original.trim(), words[index]);
-    });
-  }
-
-  language.value = 'en';
-  language.addEventListener('change', () => applyLanguage(language.value));
-  applyLanguage('en');
-})();
-</script>
-<script>
-(() => {
-  const select = document.getElementById('language');
-  if (!select) return;
-
-  const dictionary = {
-    'ЕВРОПА НАЧИНАЕТСЯ СО ЗНАКОМСТВА': ['EUROPE IS WHERE CONNECTIONS BEGIN','ЕВРОПА НАЧИНАЕТСЯ СО ЗНАКОМСТВА','TOUT COMMENCE PAR UNE RENCONTRE EN EUROPE','EUROPA BEGINNT MIT BEGEGNUNGEN','IN EUROPA TUTTO INIZIA CON UN INCONTRO'],
-    'Находите своё.': ['Find your love.','Находите своё.','Trouvez votre amour.','Finde deine Liebe.','Trova il tuo amore.'],
-    'Создать анкету': ['Create a profile','Создать анкету','Créer un profil','Profil erstellen','Crea un profilo'],
-    'Смотреть анкеты': ['Browse profiles','Смотреть анкеты','Voir les profils','Profile ansehen','Sfoglia i profili'],
-    'Знакомства без границ': ['Dating without borders','Знакомства без границ','Rencontres sans frontières','Dating ohne Grenzen','Incontri senza confini'],
-    'Красивое пространство для настоящего общения.': ['A welcoming place for genuine connections.','Красивое пространство для настоящего общения.','Un bel espace pour des échanges authentiques.','Ein schöner Ort für echte Begegnungen.','Uno spazio per connessioni autentiche.'],
-    'Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.': ['A place for genuine connections, conversations and new stories. Create your profile and start meeting people.','Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.','Un espace pour des rencontres sincères. Créez votre profil et faites des rencontres.','Ein Ort für echte Begegnungen. Erstelle dein Profil und lerne Menschen kennen.','Uno spazio per incontri autentici. Crea il tuo profilo e conosci nuove persone.'],
-    'Пароль': ['Password','Пароль','Mot de passe','Passwort','Password']
-  };
-
-  const codes = ['en','ru','fr','de','it'];
-  const records = [];
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  while (walker.nextNode()) {
-    const node = walker.currentNode;
-    if (node.parentElement.closest('script,style,select,option')) continue;
-    const original = node.nodeValue;
-    const key = Object.keys(dictionary).find(k => original.includes(k));
-    if (key) records.push({node,original,key});
-  }
-
-  function update() {
-    const index = Math.max(0,codes.indexOf(select.value));
-    records.forEach(({node,original,key}) => {
-      node.nodeValue = original.replace(key,dictionary[key][index]);
-    });
-    document.documentElement.lang = codes[index];
-  }
-
-  select.addEventListener('change',update);
-  update();
-})();
-</script>
-<script>
-(() => {
-const s=document.getElementById('language');
-if(!s)return;
-const d={
-'Найти знакомство':['Find a match','Найти знакомство','Trouver une rencontre','Partner finden','Trova una persona'],
-'Настройте поиск по интересам и месту проживания.':['Search by interests and location.','Настройте поиск по интересам и месту проживания.','Recherchez par intérêts et lieu de résidence.','Suche nach Interessen und Wohnort.','Cerca per interessi e luogo di residenza.'],
-'Кого ищете':['Who are you looking for?','Кого ищете','Qui recherchez-vous ?','Wen suchen Sie?','Chi cerchi?'],
-'Не важно':['Any','Не важно','Indifférent','Egal','Indifferente'],
-'Возраст от':['Minimum age','Возраст от','Âge minimum','Mindestalter','Età minima'],
-'Страна':['Country','Страна','Pays','Land','Paese'],
-'Найти':['Search','Найти','Rechercher','Suchen','Cerca'],
-'Например, Швейцария':['For example, Switzerland','Например, Швейцария','Par exemple, Suisse','Zum Beispiel Schweiz','Per esempio, Svizzera'],
-'Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.':['Register, complete your profile and tell us about yourself. Respect other members and do not share their personal information.','Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.','Inscrivez-vous, complétez votre profil et respectez les données personnelles des autres.','Registrieren Sie sich, vervollständigen Sie Ihr Profil und respektieren Sie die persönlichen Daten anderer.','Registrati, completa il profilo e rispetta i dati personali degli altri.']
+const T={
+en:{navAbout:"About",navProfiles:"Profiles",navSearch:"Search",login:"Sign in",eyebrow:"Europe is where connections begin",hero1:"Meet people.",hero2:"Find your love.",heroDescription:"A place for genuine connections, conversations and new stories. Create your profile and start meeting people.",createProfile:"Create a profile",browse:"Browse profiles",withoutBorders:"Dating without borders",welcome:"A welcoming place for genuine connections.",respect:"Register, complete your profile and tell us about yourself. Respect other members and do not share their personal information.",findMatch:"Find a match",searchIntro:"Search by interests and location.",who:"Who are you looking for?",any:"Any",woman:"A woman",man:"A man",age:"Minimum age",country:"Country",countryExample:"For example, Switzerland",search:"Search",members:"Members",membersIntro:"Sample profiles only — real profiles will appear after the database is connected.",exampleProfile:"Sample profile",europe18:"Europe · 18+",exampleDescription:"A short member description will appear here.",demo:"Demo profile",like:"♡ Like",yourMatch:"Your connection",yourCity:"Your city",afterRegistration:"Member profiles will appear here after registration is enabled.",newMeetings:"New connections",newPeople:"New people",filtersLater:"Search and filters will work after database setup.",footer:"Respect, safety and mutual understanding.",close:"Close",password:"Password",passwordHint:"At least 6 characters",register:"Register",createAccount:"Create an account",alreadyAccount:"Already have an account? Sign in",demoNotice:"Demo interface only. To enable real sign-in, connect Supabase and configure the database tables.",authStatus:"Demo only. Connect Supabase to enable real registration.",searchStatus:"Search will be available after the database is connected."},
+ru:{navAbout:"О проекте",navProfiles:"Анкеты",navSearch:"Поиск",login:"Войти",eyebrow:"Европа начинается со знакомства",hero1:"Встречайте людей.",hero2:"Находите своё.",heroDescription:"Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.",createProfile:"Создать анкету",browse:"Смотреть анкеты",withoutBorders:"Знакомства без границ",welcome:"Красивое пространство для настоящего общения.",respect:"Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.",findMatch:"Найти знакомство",searchIntro:"Настройте поиск по интересам и месту проживания.",who:"Кого ищете",any:"Не важно",woman:"Женщину",man:"Мужчину",age:"Возраст от",country:"Страна",countryExample:"Например, Швейцария",search:"Найти",members:"Участники",membersIntro:"Примеры оформления анкет — реальные анкеты появятся после подключения базы данных.",exampleProfile:"Анкета-пример",europe18:"Европа · 18+",exampleDescription:"Здесь будет короткое описание участника.",demo:"Демо-профиль",like:"♡ Симпатия",yourMatch:"Ваше знакомство",yourCity:"Ваш город",afterRegistration:"После регистрации здесь будут отображаться анкеты.",newMeetings:"Новые встречи",newPeople:"Новые люди",filtersLater:"Поиск и фильтры заработают после настройки базы.",footer:"Уважение, безопасность и взаимность.",close:"Закрыть",password:"Пароль",passwordHint:"Не менее 6 символов",register:"Зарегистрироваться",createAccount:"Создать аккаунт",alreadyAccount:"Уже есть аккаунт? Войти",demoNotice:"Пока демонстрационный интерфейс. Для настоящего входа подключите Supabase и настройте таблицы базы данных.",authStatus:"Демо-режим. Для регистрации подключите Supabase.",searchStatus:"Поиск станет активным после подключения базы данных."},
+fr:{navAbout:"À propos",navProfiles:"Profils",navSearch:"Recherche",login:"Se connecter",eyebrow:"Les rencontres commencent en Europe",hero1:"Rencontrez des gens.",hero2:"Trouvez l’amour.",heroDescription:"Un espace pour des rencontres sincères, des échanges et de nouvelles histoires. Créez votre profil et faites des rencontres.",createProfile:"Créer un profil",browse:"Voir les profils",withoutBorders:"Rencontres sans frontières",welcome:"Un espace accueillant pour des échanges authentiques.",respect:"Inscrivez-vous, complétez votre profil et présentez-vous. Respectez les autres membres et ne partagez pas leurs données personnelles.",findMatch:"Faire une rencontre",searchIntro:"Recherchez selon les centres d’intérêt et le lieu de résidence.",who:"Qui recherchez-vous ?",any:"Peu importe",woman:"Une femme",man:"Un homme",age:"Âge minimum",country:"Pays",countryExample:"Par exemple, Suisse",search:"Rechercher",members:"Membres",membersIntro:"Profils de démonstration — les vrais profils apparaîtront après la connexion de la base de données.",exampleProfile:"Exemple de profil",europe18:"Europe · 18+",exampleDescription:"Une courte présentation du membre apparaîtra ici.",demo:"Profil de démonstration",like:"♡ J’aime",yourMatch:"Votre rencontre",yourCity:"Votre ville",afterRegistration:"Les profils des membres apparaîtront ici une fois l’inscription activée.",newMeetings:"Nouvelles rencontres",newPeople:"Nouvelles personnes",filtersLater:"La recherche et les filtres fonctionneront après la configuration de la base de données.",footer:"Respect, sécurité et réciprocité.",close:"Fermer",password:"Mot de passe",passwordHint:"Au moins 6 caractères",register:"S’inscrire",createAccount:"Créer un compte",alreadyAccount:"Déjà un compte ? Se connecter",demoNotice:"Interface de démonstration. Connectez Supabase et configurez les tables pour activer la connexion.",authStatus:"Mode démo. Connectez Supabase pour activer l’inscription.",searchStatus:"La recherche sera disponible après la connexion de la base de données."},
+de:{navAbout:"Über uns",navProfiles:"Profile",navSearch:"Suche",login:"Anmelden",eyebrow:"Begegnungen beginnen in Europa",hero1:"Menschen kennenlernen.",hero2:"Liebe finden.",heroDescription:"Ein Ort für echte Begegnungen, Gespräche und neue Geschichten. Erstelle dein Profil und lerne Menschen kennen.",createProfile:"Profil erstellen",browse:"Profile ansehen",withoutBorders:"Dating ohne Grenzen",welcome:"Ein einladender Ort für echte Begegnungen.",respect:"Registriere dich, vervollständige dein Profil und erzähle von dir. Respektiere andere Mitglieder und teile keine fremden persönlichen Daten.",findMatch:"Kontakte finden",searchIntro:"Suche nach Interessen und Wohnort.",who:"Wen suchst du?",any:"Egal",woman:"Eine Frau",man:"Einen Mann",age:"Mindestalter",country:"Land",countryExample:"Zum Beispiel Schweiz",search:"Suchen",members:"Mitglieder",membersIntro:"Beispielprofile — echte Profile erscheinen nach der Anbindung der Datenbank.",exampleProfile:"Beispielprofil",europe18:"Europa · 18+",exampleDescription:"Hier erscheint eine kurze Beschreibung des Mitglieds.",demo:"Demoprofil",like:"♡ Gefällt mir",yourMatch:"Deine Begegnung",yourCity:"Deine Stadt",afterRegistration:"Mitgliederprofile erscheinen hier, sobald die Registrierung aktiviert ist.",newMeetings:"Neue Begegnungen",newPeople:"Neue Menschen",filtersLater:"Suche und Filter funktionieren nach der Datenbankeinrichtung.",footer:"Respekt, Sicherheit und Gegenseitigkeit.",close:"Schließen",password:"Passwort",passwordHint:"Mindestens 6 Zeichen",register:"Registrieren",createAccount:"Konto erstellen",alreadyAccount:"Schon ein Konto? Anmelden",demoNotice:"Nur Demo-Oberfläche. Verbinde Supabase und richte die Datenbanktabellen für die Anmeldung ein.",authStatus:"Demomodus. Verbinde Supabase, um die Registrierung zu aktivieren.",searchStatus:"Die Suche wird nach der Datenbankanbindung verfügbar."},
+it:{navAbout:"Chi siamo",navProfiles:"Profili",navSearch:"Cerca",login:"Accedi",eyebrow:"Gli incontri iniziano in Europa",hero1:"Incontra nuove persone.",hero2:"Trova l’amore.",heroDescription:"Uno spazio per incontri autentici, conversazioni e nuove storie. Crea il tuo profilo e conosci nuove persone.",createProfile:"Crea un profilo",browse:"Sfoglia i profili",withoutBorders:"Incontri senza confini",welcome:"Uno spazio accogliente per connessioni autentiche.",respect:"Registrati, completa il profilo e racconta qualcosa di te. Rispetta gli altri membri e non condividere i loro dati personali.",findMatch:"Trova una persona",searchIntro:"Cerca per interessi e luogo di residenza.",who:"Chi cerchi?",any:"Indifferente",woman:"Una donna",man:"Un uomo",age:"Età minima",country:"Paese",countryExample:"Per esempio, Svizzera",search:"Cerca",members:"Membri",membersIntro:"Profili dimostrativi — i profili reali appariranno dopo il collegamento del database.",exampleProfile:"Profilo di esempio",europe18:"Europa · 18+",exampleDescription:"Qui apparirà una breve descrizione del membro.",demo:"Profilo demo",like:"♡ Mi piace",yourMatch:"Il tuo incontro",yourCity:"La tua città",afterRegistration:"I profili dei membri appariranno qui quando sarà attiva la registrazione.",newMeetings:"Nuovi incontri",newPeople:"Nuove persone",filtersLater:"La ricerca e i filtri funzioneranno dopo la configurazione del database.",footer:"Rispetto, sicurezza e reciprocità.",close:"Chiudi",password:"Password",passwordHint:"Almeno 6 caratteri",register:"Registrati",createAccount:"Crea un account",alreadyAccount:"Hai già un account? Accedi",demoNotice:"Interfaccia dimostrativa. Collega Supabase e configura le tabelle del database per abilitare l’accesso.",authStatus:"Modalità demo. Collega Supabase per abilitare la registrazione.",searchStatus:"La ricerca sarà disponibile dopo il collegamento del database."}
 };
-const codes=['en','ru','fr','de','it'];
-const records=[];
-const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-while(w.nextNode()){
-const n=w.currentNode;
-if(n.parentElement.closest('script,style'))continue;
-const k=Object.keys(d).find(x=>n.nodeValue.trim()===x);
-if(k)records.push({n,k,original:n.nodeValue});
-}
-const placeholders=[...document.querySelectorAll('[placeholder]')].map(el=>({el,original:el.placeholder}));
-function update(){
-const i=Math.max(0,codes.indexOf(s.value));
-records.forEach(({n,k,original})=>n.nodeValue=original.replace(k,d[k][i]));
-placeholders.forEach(({el,original})=>el.placeholder=d[original]?d[original][i]:original);
-}
-s.addEventListener('change',update);
-update();
-})();
-</script>
-</body></html>
+const language=document.getElementById('language'),modal=document.getElementById('authModal');let mode='login';
+function tr(key){return T[language.value][key]||T.en[key]||key}
+function applyLanguage(code){language.value=T[code]?code:'en';document.documentElement.lang=language.value;document.querySelectorAll('[data-i]').forEach(el=>{el.textContent=tr(el.dataset.i)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});updateAuth();if(document.getElementById('authStatus').dataset.shown==='yes')document.getElementById('authStatus').textContent=tr('authStatus')}
+function updateAuth(){document.getElementById('modalTitle').textContent=tr(mode==='login'?'login':'createAccount');document.getElementById('authSubmit').textContent=tr(mode==='login'?'login':'register');document.getElementById('switchMode').textContent=tr(mode==='login'?'createAccount':'alreadyAccount')}
+function showAuth(m){mode=m;document.getElementById('authStatus').textContent='';document.getElementById('authStatus').dataset.shown='no';updateAuth();modal.classList.add('open')}
+language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
+document.getElementById('authForm').onsubmit=e=>{e.preventDefault();const status=document.getElementById('authStatus');status.dataset.shown='yes';status.textContent=tr('authStatus')};
+document.getElementById('filterBtn').onclick=()=>{document.getElementById('profiles').scrollIntoView({behavior:'smooth'});alert(tr('searchStatus'))};
+applyLanguage('en');
+</script></body></html>
