@@ -26,6 +26,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:1
 <header><div class="wrap nav">
   <div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div>
   <nav><a href="#how">О проекте</a><a href="#people">Анкеты</a><a href="#search">Поиск</a></nav>
+  <select id="language" aria-label="Language"><option value="en">English</option><option value="ru">Русский</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select>
   <button class="btn small" id="openAuth">Войти</button>
 </div></header>
 <main>
@@ -76,5 +77,43 @@ function showAuth(m){mode=m;document.getElementById('modalTitle').textContent=m=
 document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
 document.getElementById('authForm').onsubmit=e=>{e.preventDefault();document.getElementById('authStatus').textContent='Интерфейс готов. Для реальной регистрации сначала подключите Supabase (см. README).';};
 document.getElementById('filterBtn').onclick=()=>{document.getElementById('profiles').scrollIntoView({behavior:'smooth'});alert('Поиск станет активным после подключения базы данных.');};
+</script>
+<script>
+(() => {
+  const language = document.getElementById('language');
+  if (!language) return;
+
+  const translations = {
+    en: ['About us', 'How it works', 'Sign in', 'Europe is where it begins', 'Meet people.', 'Find your love.', 'Email', 'Password', 'Demo interface only'],
+    ru: ['О проекте', 'Как это работает', 'Войти', 'Европа начинается со знакомств', 'Встречайте людей.', 'Находите свою любовь.', 'Email', 'Пароль', 'Пока демонстрационный интерфейс'],
+    fr: ['À propos', 'Comment ça marche', 'Connexion', 'Tout commence en Europe', 'Faites des rencontres.', 'Trouvez l’amour.', 'E-mail', 'Mot de passe', 'Interface de démonstration'],
+    de: ['Über uns', 'So funktioniert es', 'Anmelden', 'In Europa beginnt alles', 'Menschen kennenlernen.', 'Liebe finden.', 'E-Mail', 'Passwort', 'Demo-Oberfläche'],
+    it: ['Chi siamo', 'Come funziona', 'Accedi', 'Tutto inizia in Europa', 'Incontra persone.', 'Trova l’amore.', 'Email', 'Password', 'Interfaccia dimostrativa']
+  };
+
+  const originals = translations.ru;
+  const textNodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement.closest('script, style, select, option')) continue;
+    const original = node.nodeValue;
+    const index = originals.findIndex(t => original.trim() === t);
+    if (index !== -1) textNodes.push({ node, original, index });
+  }
+
+  function applyLanguage(lang) {
+    const words = translations[lang] || translations.en;
+    document.documentElement.lang = lang;
+    textNodes.forEach(({node, original, index}) => {
+      node.nodeValue = original.replace(original.trim(), words[index]);
+    });
+  }
+
+  language.value = 'en';
+  language.addEventListener('change', () => applyLanguage(language.value));
+  applyLanguage('en');
+})();
 </script>
 </body></html>
