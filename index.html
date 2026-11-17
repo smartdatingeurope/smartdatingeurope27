@@ -116,4 +116,43 @@ document.getElementById('filterBtn').onclick=()=>{document.getElementById('profi
   applyLanguage('en');
 })();
 </script>
+<script>
+(() => {
+  const select = document.getElementById('language');
+  if (!select) return;
+
+  const dictionary = {
+    'ЕВРОПА НАЧИНАЕТСЯ СО ЗНАКОМСТВА': ['EUROPE IS WHERE CONNECTIONS BEGIN','ЕВРОПА НАЧИНАЕТСЯ СО ЗНАКОМСТВА','TOUT COMMENCE PAR UNE RENCONTRE EN EUROPE','EUROPA BEGINNT MIT BEGEGNUNGEN','IN EUROPA TUTTO INIZIA CON UN INCONTRO'],
+    'Находите своё.': ['Find your love.','Находите своё.','Trouvez votre amour.','Finde deine Liebe.','Trova il tuo amore.'],
+    'Создать анкету': ['Create a profile','Создать анкету','Créer un profil','Profil erstellen','Crea un profilo'],
+    'Смотреть анкеты': ['Browse profiles','Смотреть анкеты','Voir les profils','Profile ansehen','Sfoglia i profili'],
+    'Знакомства без границ': ['Dating without borders','Знакомства без границ','Rencontres sans frontières','Dating ohne Grenzen','Incontri senza confini'],
+    'Красивое пространство для настоящего общения.': ['A welcoming place for genuine connections.','Красивое пространство для настоящего общения.','Un bel espace pour des échanges authentiques.','Ein schöner Ort für echte Begegnungen.','Uno spazio per connessioni autentiche.'],
+    'Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.': ['A place for genuine connections, conversations and new stories. Create your profile and start meeting people.','Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.','Un espace pour des rencontres sincères. Créez votre profil et faites des rencontres.','Ein Ort für echte Begegnungen. Erstelle dein Profil und lerne Menschen kennen.','Uno spazio per incontri autentici. Crea il tuo profilo e conosci nuove persone.'],
+    'Пароль': ['Password','Пароль','Mot de passe','Passwort','Password']
+  };
+
+  const codes = ['en','ru','fr','de','it'];
+  const records = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    if (node.parentElement.closest('script,style,select,option')) continue;
+    const original = node.nodeValue;
+    const key = Object.keys(dictionary).find(k => original.includes(k));
+    if (key) records.push({node,original,key});
+  }
+
+  function update() {
+    const index = Math.max(0,codes.indexOf(select.value));
+    records.forEach(({node,original,key}) => {
+      node.nodeValue = original.replace(key,dictionary[key][index]);
+    });
+    document.documentElement.lang = codes[index];
+  }
+
+  select.addEventListener('change',update);
+  update();
+})();
+</script>
 </body></html>
