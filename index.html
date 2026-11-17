@@ -155,4 +155,38 @@ document.getElementById('filterBtn').onclick=()=>{document.getElementById('profi
   update();
 })();
 </script>
+<script>
+(() => {
+const s=document.getElementById('language');
+if(!s)return;
+const d={
+'Найти знакомство':['Find a match','Найти знакомство','Trouver une rencontre','Partner finden','Trova una persona'],
+'Настройте поиск по интересам и месту проживания.':['Search by interests and location.','Настройте поиск по интересам и месту проживания.','Recherchez par intérêts et lieu de résidence.','Suche nach Interessen und Wohnort.','Cerca per interessi e luogo di residenza.'],
+'Кого ищете':['Who are you looking for?','Кого ищете','Qui recherchez-vous ?','Wen suchen Sie?','Chi cerchi?'],
+'Не важно':['Any','Не важно','Indifférent','Egal','Indifferente'],
+'Возраст от':['Minimum age','Возраст от','Âge minimum','Mindestalter','Età minima'],
+'Страна':['Country','Страна','Pays','Land','Paese'],
+'Найти':['Search','Найти','Rechercher','Suchen','Cerca'],
+'Например, Швейцария':['For example, Switzerland','Например, Швейцария','Par exemple, Suisse','Zum Beispiel Schweiz','Per esempio, Svizzera'],
+'Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.':['Register, complete your profile and tell us about yourself. Respect other members and do not share their personal information.','Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.','Inscrivez-vous, complétez votre profil et respectez les données personnelles des autres.','Registrieren Sie sich, vervollständigen Sie Ihr Profil und respektieren Sie die persönlichen Daten anderer.','Registrati, completa il profilo e rispetta i dati personali degli altri.']
+};
+const codes=['en','ru','fr','de','it'];
+const records=[];
+const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+while(w.nextNode()){
+const n=w.currentNode;
+if(n.parentElement.closest('script,style'))continue;
+const k=Object.keys(d).find(x=>n.nodeValue.trim()===x);
+if(k)records.push({n,k,original:n.nodeValue});
+}
+const placeholders=[...document.querySelectorAll('[placeholder]')].map(el=>({el,original:el.placeholder}));
+function update(){
+const i=Math.max(0,codes.indexOf(s.value));
+records.forEach(({n,k,original})=>n.nodeValue=original.replace(k,d[k][i]));
+placeholders.forEach(({el,original})=>el.placeholder=d[original]?d[original][i]:original);
+}
+s.addEventListener('change',update);
+update();
+})();
+</script>
 </body></html>
