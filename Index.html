@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0b"><title>Smart Dating Europe — Find Your Love</title>
+<style>
+:root{--bg:#090909;--panel:#141414;--panel2:#1c1b18;--gold:#d6b15e;--gold2:#f2d88d;--muted:#aaa49a;--line:#383126;--white:#f7f3e9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#3a2c12 0,#111 36%,#080808 75%);color:var(--white);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1120px;margin:auto;padding:0 20px}
+header{position:sticky;top:0;z-index:5;background:#090909ef;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}.brand{font-weight:800;letter-spacing:.08em;color:var(--gold2);font-size:18px}.brand span{display:block;color:#aaa;font-size:10px;letter-spacing:.28em;font-weight:500}
+nav{display:flex;gap:18px;align-items:center}nav a{color:#ddd;text-decoration:none;font-size:14px}nav a:hover{color:var(--gold2)}
+#language{background:#171613;color:var(--white);border:1px solid var(--gold);border-radius:8px;padding:8px}
+.btn{border:1px solid var(--gold);background:linear-gradient(135deg,#f1d58a,#b98b36);color:#17120a;border-radius:999px;padding:11px 19px;font-weight:750;box-shadow:0 5px 22px #d6b15e22}.btn.ghost{background:transparent;color:var(--gold2);box-shadow:none}.btn.small{padding:8px 14px;font-size:13px}.btn:disabled{opacity:.55;cursor:not-allowed}
+.hero{padding:76px 0 58px;text-align:center}.eyebrow{color:var(--gold);letter-spacing:.24em;text-transform:uppercase;font-size:11px;font-weight:700}.hero h1{font:500 clamp(38px,7vw,72px)/1.06 Georgia,serif;margin:18px auto;max-width:850px}.hero h1 em{color:var(--gold2);font-style:normal}.hero p{color:#c5beb0;max-width:620px;margin:0 auto 26px}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.section{padding:48px 0}.section h2{font:500 36px Georgia,serif;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:linear-gradient(150deg,#1c1a16,#111);border:1px solid var(--line);border-radius:18px;overflow:hidden}.portrait{height:210px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#78603a,#302416 55%,#17130e);font-size:64px}.cardbody{padding:17px}.card h3{margin:0 0 4px;font-size:19px}.meta{color:var(--gold2);font-size:13px}.card p{color:#bcb5a8;font-size:14px;min-height:42px}.cardfoot{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel{background:#121212;border:1px solid var(--line);border-radius:18px;padding:24px}.filters{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;align-items:end}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;background:#090909;border:1px solid #51442c;color:white;border-radius:10px;padding:12px;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:13px;margin-top:45px}.modal{position:fixed;inset:0;background:#000c;display:none;place-items:center;padding:18px;z-index:10}.modal.open{display:grid}.dialog{width:min(460px,100%);background:#171613;border:1px solid var(--gold);border-radius:18px;padding:24px;max-height:90vh;overflow:auto}.dialog h2{font:28px Georgia,serif;margin:0 0 16px}.dialog .field{margin:12px 0}.dialog .btn{width:100%;margin-top:10px}.close{float:right;background:none;border:0;color:#ddd;font-size:24px}.notice{color:#bfb6a4;font-size:12px;margin-top:12px}.status{color:var(--gold2);min-height:22px;font-size:13px;margin-top:8px}
+@media(max-width:760px){nav{display:none}.grid{grid-template-columns:1fr 1fr}.filters{grid-template-columns:1fr 1fr}.hero{padding:55px 0 38px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.portrait{height:190px}.section h2{font-size:30px}.filters{grid-template-columns:1fr}.brand{font-size:14px}}
+</style></head><body>
+<header><div class="wrap nav"><div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div><nav><a href="#how" data-i="navAbout"></a><a href="#people" data-i="navProfiles"></a><a href="#search" data-i="navSearch"></a></nav><select id="language" aria-label="Language"><option value="en">English</option><option value="ru">Русский</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select><button class="btn small" id="openAuth" data-i="login"></button></div></header>
+<main><section class="hero wrap"><div class="eyebrow" data-i="eyebrow"></div><h1><span data-i="hero1"></span><br><em data-i="hero2"></em></h1><p data-i="heroDescription"></p><div class="actions"><button class="btn" id="openRegister" data-i="createProfile"></button><a class="btn ghost" href="#people" data-i="browse"></a></div></section>
+<section class="section wrap" id="how"><div class="eyebrow">Smart Dating Europe</div><h2 data-i="withoutBorders"></h2><p class="sub" data-i="welcome"></p><div class="panel"><p style="margin:0;color:#c9c0b0" data-i="respect"></p></div></section>
+<section class="section wrap" id="search"><h2 data-i="findMatch"></h2><p class="sub" data-i="searchIntro"></p><div class="panel filters"><div class="field"><label for="country" data-i="country"></label><input id="country" data-placeholder="countryExample"></div><div class="field"><label for="city" data-i="city"></label><input id="city" data-placeholder="cityExample"></div><button class="btn" id="filterBtn" data-i="search"></button></div></section>
+<section class="section wrap" id="people"><h2 data-i="members"></h2><p class="sub" data-i="membersIntro"></p><div class="grid" id="profiles" aria-live="polite"><p class="sub" data-i="loadingProfiles"></p></div></section></main><footer><div class="wrap">© 2026 Smart Dating Europe · <span data-i="footer"></span></div></footer>
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://lhxdfwgldecmilxaqpcp.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_vktrlV800QX2YQ7Bqj5-lw_xcH5bT48";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const T={
+en:{city:"City",cityExample:"For example, Sion",loadingProfiles:"Loading member profiles…",noProfiles:"No public profiles yet. Be the first to create yours.",profilesError:"Could not load profiles. Check the profiles table access policy in Supabase.",navAbout:"About",navProfiles:"Profiles",navSearch:"Search",login:"Sign in",eyebrow:"Europe is where connections begin",hero1:"Meet people.",hero2:"Find your love.",heroDescription:"A place for genuine connections, conversations and new stories. Create your profile and start meeting people.",createProfile:"Create a profile",browse:"Browse profiles",withoutBorders:"Dating without borders",welcome:"A welcoming place for genuine connections.",respect:"Register, complete your profile and tell us about yourself. Respect other members and do not share their personal information.",findMatch:"Find a match",searchIntro:"Search by interests and location.",who:"Who are you looking for?",any:"Any",woman:"A woman",man:"A man",age:"Minimum age",country:"Country",countryExample:"For example, Switzerland",search:"Search",members:"Members",membersIntro:"Member profiles are loaded from the database.",exampleProfile:"Sample profile",europe18:"Europe · 18+",exampleDescription:"A short member description will appear here.",demo:"Demo profile",like:"♡ Like",yourMatch:"Your connection",yourCity:"Your city",afterRegistration:"Member profiles will appear here after registration is enabled.",newMeetings:"New connections",newPeople:"New people",filtersLater:"Search and filters will work after database setup.",footer:"Respect, safety and mutual understanding.",close:"Close",password:"Password",passwordHint:"At least 6 characters",register:"Register",createAccount:"Create an account",alreadyAccount:"Already have an account? Sign in",demoNotice:"Sign-up and sign-in use Supabase. Check your email if address confirmation is required.",authStatus:"Demo only. Connect Supabase to enable real registration.",searchStatus:"Search will be available after the database is connected."},
+ru:{city:"Город",cityExample:"Например, Сион",loadingProfiles:"Загружаем анкеты участников…",noProfiles:"Пока нет опубликованных анкет. Станьте первым и создайте свою.",profilesError:"Не удалось загрузить анкеты. Проверьте политику доступа к таблице profiles в Supabase.",navAbout:"О проекте",navProfiles:"Анкеты",navSearch:"Поиск",login:"Войти",eyebrow:"Европа начинается со знакомства",hero1:"Встречайте людей.",hero2:"Находите своё.",heroDescription:"Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.",createProfile:"Создать анкету",browse:"Смотреть анкеты",withoutBorders:"Знакомства без границ",welcome:"Красивое пространство для настоящего общения.",respect:"Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.",findMatch:"Найти знакомство",searchIntro:"Настройте поиск по интересам и месту проживания.",who:"Кого ищете",any:"Не важно",woman:"Женщину",man:"Мужчину",age:"Возраст от",country:"Страна",countryExample:"Например, Швейцария",search:"Найти",members:"Участники",membersIntro:"Анкеты участников загружаются из базы данных.",exampleProfile:"Анкета-пример",europe18:"Европа · 18+",exampleDescription:"Здесь будет короткое описание участника.",demo:"Демо-профиль",like:"♡ Симпатия",yourMatch:"Ваше знакомство",yourCity:"Ваш город",afterRegistration:"После регистрации здесь будут отображаться анкеты.",newMeetings:"Новые встречи",newPeople:"Новые люди",filtersLater:"Поиск и фильтры заработают после настройки базы.",footer:"Уважение, безопасность и взаимность.",close:"Закрыть",password:"Пароль",passwordHint:"Не менее 6 символов",register:"Зарегистрироваться",createAccount:"Создать аккаунт",alreadyAccount:"Уже есть аккаунт? Войти",demoNotice:"Регистрация и вход выполняются через Supabase. После регистрации проверьте почту, если потребуется подтверждение.",authStatus:"Демо-режим. Для регистрации подключите Supabase.",searchStatus:"Поиск станет активным после подключения базы данных."},
+fr:{city:"Ville",cityExample:"Par exemple, Sion",loadingProfiles:"Chargement des profils…",noProfiles:"Aucun profil public pour le moment. Créez le vôtre.",profilesError:"Impossible de charger les profils. Vérifiez les règles d’accès de la table profiles dans Supabase.",navAbout:"À propos",navProfiles:"Profils",navSearch:"Recherche",login:"Se connecter",eyebrow:"Les rencontres commencent en Europe",hero1:"Rencontrez des gens.",hero2:"Trouvez l’amour.",heroDescription:"Un espace pour des rencontres sincères, des échanges et de nouvelles histoires. Créez votre profil et faites des rencontres.",createProfile:"Créer un profil",browse:"Voir les profils",withoutBorders:"Rencontres sans frontières",welcome:"Un espace accueillant pour des échanges authentiques.",respect:"Inscrivez-vous, complétez votre profil et présentez-vous. Respectez les autres membres et ne partagez pas leurs données personnelles.",findMatch:"Faire une rencontre",searchIntro:"Recherchez selon les centres d’intérêt et le lieu de résidence.",who:"Qui recherchez-vous ?",any:"Peu importe",woman:"Une femme",man:"Un homme",age:"Âge minimum",country:"Pays",countryExample:"Par exemple, Suisse",search:"Rechercher",members:"Membres",membersIntro:"Les profils des membres sont chargés depuis la base de données.",exampleProfile:"Exemple de profil",europe18:"Europe · 18+",exampleDescription:"Une courte présentation du membre apparaîtra ici.",demo:"Profil de démonstration",like:"♡ J’aime",yourMatch:"Votre rencontre",yourCity:"Votre ville",afterRegistration:"Les profils des membres apparaîtront ici une fois l’inscription activée.",newMeetings:"Nouvelles rencontres",newPeople:"Nouvelles personnes",filtersLater:"La recherche et les filtres fonctionneront après la configuration de la base de données.",footer:"Respect, sécurité et réciprocité.",close:"Fermer",password:"Mot de passe",passwordHint:"Au moins 6 caractères",register:"S’inscrire",createAccount:"Créer un compte",alreadyAccount:"Déjà un compte ? Se connecter",demoNotice:"L’inscription et la connexion utilisent Supabase. Vérifiez votre e-mail si une confirmation est demandée.",authStatus:"Mode démo. Connectez Supabase pour activer l’inscription.",searchStatus:"La recherche sera disponible après la connexion de la base de données."},
+de:{city:"Stadt",cityExample:"Zum Beispiel Sion",loadingProfiles:"Mitgliederprofile werden geladen…",noProfiles:"Noch keine öffentlichen Profile. Erstelle dein eigenes Profil.",profilesError:"Profile konnten nicht geladen werden. Prüfe die Zugriffsrichtlinie der Tabelle profiles in Supabase.",navAbout:"Über uns",navProfiles:"Profile",navSearch:"Suche",login:"Anmelden",eyebrow:"Begegnungen beginnen in Europa",hero1:"Menschen kennenlernen.",hero2:"Liebe finden.",heroDescription:"Ein Ort für echte Begegnungen, Gespräche und neue Geschichten. Erstelle dein Profil und lerne Menschen kennen.",createProfile:"Profil erstellen",browse:"Profile ansehen",withoutBorders:"Dating ohne Grenzen",welcome:"Ein einladender Ort für echte Begegnungen.",respect:"Registriere dich, vervollständige dein Profil und erzähle von dir. Respektiere andere Mitglieder und teile keine fremden persönlichen Daten.",findMatch:"Kontakte finden",searchIntro:"Suche nach Interessen und Wohnort.",who:"Wen suchst du?",any:"Egal",woman:"Eine Frau",man:"Einen Mann",age:"Mindestalter",country:"Land",countryExample:"Zum Beispiel Schweiz",search:"Suchen",members:"Mitglieder",membersIntro:"Mitgliederprofile werden aus der Datenbank geladen.",exampleProfile:"Beispielprofil",europe18:"Europa · 18+",exampleDescription:"Hier erscheint eine kurze Beschreibung des Mitglieds.",demo:"Demoprofil",like:"♡ Gefällt mir",yourMatch:"Deine Begegnung",yourCity:"Deine Stadt",afterRegistration:"Mitgliederprofile erscheinen hier, sobald die Registrierung aktiviert ist.",newMeetings:"Neue Begegnungen",newPeople:"Neue Menschen",filtersLater:"Suche und Filter funktionieren nach der Datenbankeinrichtung.",footer:"Respekt, Sicherheit und Gegenseitigkeit.",close:"Schließen",password:"Passwort",passwordHint:"Mindestens 6 Zeichen",register:"Registrieren",createAccount:"Konto erstellen",alreadyAccount:"Schon ein Konto? Anmelden",demoNotice:"Registrierung und Anmeldung verwenden Supabase. Prüfe deine E-Mails, falls eine Bestätigung nötig ist.",authStatus:"Demomodus. Verbinde Supabase, um die Registrierung zu aktivieren.",searchStatus:"Die Suche wird nach der Datenbankanbindung verfügbar."},
+it:{city:"Città",cityExample:"Per esempio, Sion",loadingProfiles:"Caricamento dei profili…",noProfiles:"Non ci sono ancora profili pubblici. Crea il tuo profilo.",profilesError:"Impossibile caricare i profili. Controlla le regole di accesso della tabella profiles in Supabase.",navAbout:"Chi siamo",navProfiles:"Profili",navSearch:"Cerca",login:"Accedi",eyebrow:"Gli incontri iniziano in Europa",hero1:"Incontra nuove persone.",hero2:"Trova l’amore.",heroDescription:"Uno spazio per incontri autentici, conversazioni e nuove storie. Crea il tuo profilo e conosci nuove persone.",createProfile:"Crea un profilo",browse:"Sfoglia i profili",withoutBorders:"Incontri senza confini",welcome:"Uno spazio accogliente per connessioni autentiche.",respect:"Registrati, completa il profilo e racconta qualcosa di te. Rispetta gli altri membri e non condividere i loro dati personali.",findMatch:"Trova una persona",searchIntro:"Cerca per interessi e luogo di residenza.",who:"Chi cerchi?",any:"Indifferente",woman:"Una donna",man:"Un uomo",age:"Età minima",country:"Paese",countryExample:"Per esempio, Svizzera",search:"Cerca",members:"Membri",membersIntro:"I profili dei membri vengono caricati dal database.",exampleProfile:"Profilo di esempio",europe18:"Europa · 18+",exampleDescription:"Qui apparirà una breve descrizione del membro.",demo:"Profilo demo",like:"♡ Mi piace",yourMatch:"Il tuo incontro",yourCity:"La tua città",afterRegistration:"I profili dei membri appariranno qui quando sarà attiva la registrazione.",newMeetings:"Nuovi incontri",newPeople:"Nuove persone",filtersLater:"La ricerca e i filtri funzioneranno dopo la configurazione del database.",footer:"Rispetto, sicurezza e reciprocità.",close:"Chiudi",password:"Password",passwordHint:"Almeno 6 caratteri",register:"Registrati",createAccount:"Crea un account",alreadyAccount:"Hai già un account? Accedi",demoNotice:"Registrazione e accesso usano Supabase. Controlla l’e-mail se è richiesta una conferma.",authStatus:"Modalità demo. Collega Supabase per abilitare la registrazione.",searchStatus:"La ricerca sarà disponibile dopo il collegamento del database."}
+};
+const language=document.getElementById('language'),modal=document.getElementById('authModal');let mode='login';
+function tr(key){return T[language.value][key]||T.en[key]||key}
+function applyLanguage(code){language.value=T[code]?code:'en';document.documentElement.lang=language.value;document.querySelectorAll('[data-i]').forEach(el=>{el.textContent=tr(el.dataset.i)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});updateAuth();if(document.getElementById('authStatus').dataset.shown==='yes')document.getElementById('authStatus').textContent=tr('authStatus')}
+function updateAuth(){document.getElementById('modalTitle').textContent=tr(mode==='login'?'login':'createAccount');document.getElementById('authSubmit').textContent=tr(mode==='login'?'login':'register');document.getElementById('switchMode').textContent=tr(mode==='login'?'createAccount':'alreadyAccount')}
+function showAuth(m){mode=m;document.getElementById('authStatus').textContent='';document.getElementById('authStatus').dataset.shown='no';updateAuth();modal.classList.add('open')}
+language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
+document.getElementById('authForm').onsubmit=async e=>{
+ e.preventDefault();
+ const status=document.getElementById('authStatus');
+ const submit=document.getElementById('authSubmit');
+ status.dataset.shown='yes'; status.textContent='Please wait…'; submit.disabled=true;
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('password').value;
+ try {
+   let result;
+   if(mode==='register') {
+     result=await db.auth.signUp({email,password});
+     if(!result.error && !result.data.session) {
+       status.textContent='Account created. Check your email to confirm your address, then sign in.';
+     } else if(!result.error) {
+       status.textContent='Account created and signed in.';
+       modal.classList.remove('open');
+     }
+   } else {
+     result=await db.auth.signInWithPassword({email,password});
+     if(!result.error) {
+       status.textContent='Signed in successfully.';
+       modal.classList.remove('open');
+       document.getElementById('openAuth').textContent='Sign out';
+     }
+   }
+   if(result.error) status.textContent=result.error.message;
+ } catch(err) { status.textContent='Connection error: '+err.message; }
+ finally { submit.disabled=false; }
+};
+document.getElementById('openAuth').addEventListener('click',async()=>{
+ const {data}=await db.auth.getSession();
+ if(data.session) {
+   await db.auth.signOut();
+   document.getElementById('openAuth').textContent=tr('login');
+ } else showAuth('login');
+});
+function showProfileMessage(message){
+ const root=document.getElementById('profiles');
+ root.replaceChildren();
+ const p=document.createElement('p');
+ p.className='sub'; p.textContent=message; root.appendChild(p);
+}
+function renderProfiles(rows){
+ const root=document.getElementById('profiles');
+ root.replaceChildren();
+ if(!rows || rows.length===0){showProfileMessage(tr('noProfiles'));return;}
+ rows.forEach(profile=>{
+   const card=document.createElement('article'); card.className='card';
+   const portrait=document.createElement('div'); portrait.className='portrait'; portrait.textContent='♡';
+   const body=document.createElement('div'); body.className='cardbody';
+   const name=document.createElement('h3'); name.textContent=profile.username || 'Member';
+   const meta=document.createElement('div'); meta.className='meta';
+   meta.textContent=[profile.city,profile.country].filter(Boolean).join(' · ') || 'Europe';
+   const bio=document.createElement('p'); bio.textContent=profile.bio || '';
+   body.append(name,meta,bio); card.append(portrait,body); root.appendChild(card);
+ });
+}
+async function loadProfiles(){
+ const root=document.getElementById('profiles');
+ showProfileMessage(tr('loadingProfiles'));
+ let query=db.from('profiles').select('id,username,country,city,bio,created_at').order('created_at',{ascending:false}).limit(60);
+ const country=document.getElementById('country').value.trim();
+ const city=document.getElementById('city').value.trim();
+ if(country) query=query.ilike('country','%'+country+'%');
+ if(city) query=query.ilike('city','%'+city+'%');
+ const {data,error}=await query;
+ if(error){console.error('Supabase profiles:',error);showProfileMessage(tr('profilesError'));return;}
+ renderProfiles(data);
+}
+document.getElementById('filterBtn').onclick=()=>{loadProfiles();document.getElementById('people').scrollIntoView({behavior:'smooth'});};
+document.getElementById('country').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();loadProfiles();}});
+document.getElementById('city').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();loadProfiles();}});
+db.auth.onAuthStateChange((_event,session)=>{
+ if(session) document.getElementById('openAuth').textContent='Sign out';
+ else document.getElementById('openAuth').textContent=tr('login');
+});
+applyLanguage('ru');
+loadProfiles();
+</script></body></html>
