@@ -25,8 +25,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:1
 <article class="card"><div class="portrait">❖</div><div class="cardbody"><h3 data-i="yourMatch"></h3><div class="meta" data-i="yourCity"></div><p data-i="afterRegistration"></p><div class="cardfoot"><span class="meta" data-i="demo"></span><button class="btn small ghost" disabled data-i="like"></button></div></div></article>
 <article class="card"><div class="portrait">✧</div><div class="cardbody"><h3 data-i="newMeetings"></h3><div class="meta" data-i="newPeople"></div><p data-i="filtersLater"></p><div class="cardfoot"><span class="meta" data-i="demo"></span><button class="btn small ghost" disabled data-i="like"></button></div></div></article>
 </div></section></main><footer><div class="wrap">© 2026 Smart Dating Europe · <span data-i="footer"></span></div></footer>
-<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" id="authHelp"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL="https://lhxdfwgldecmilxaqpcp.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_vktrlV800QX2YQ7Bqj5-lw_xcH5bT48";
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 const T={
 en:{navAbout:"About",navProfiles:"Profiles",navSearch:"Search",login:"Sign in",eyebrow:"Europe is where connections begin",hero1:"Meet people.",hero2:"Find your love.",heroDescription:"A place for genuine connections, conversations and new stories. Create your profile and start meeting people.",createProfile:"Create a profile",browse:"Browse profiles",withoutBorders:"Dating without borders",welcome:"A welcoming place for genuine connections.",respect:"Register, complete your profile and tell us about yourself. Respect other members and do not share their personal information.",findMatch:"Find a match",searchIntro:"Search by interests and location.",who:"Who are you looking for?",any:"Any",woman:"A woman",man:"A man",age:"Minimum age",country:"Country",countryExample:"For example, Switzerland",search:"Search",members:"Members",membersIntro:"Sample profiles only — real profiles will appear after the database is connected.",exampleProfile:"Sample profile",europe18:"Europe · 18+",exampleDescription:"A short member description will appear here.",demo:"Demo profile",like:"♡ Like",yourMatch:"Your connection",yourCity:"Your city",afterRegistration:"Member profiles will appear here after registration is enabled.",newMeetings:"New connections",newPeople:"New people",filtersLater:"Search and filters will work after database setup.",footer:"Respect, safety and mutual understanding.",close:"Close",password:"Password",passwordHint:"At least 6 characters",register:"Register",createAccount:"Create an account",alreadyAccount:"Already have an account? Sign in",demoNotice:"Demo interface only. To enable real sign-in, connect Supabase and configure the database tables.",authStatus:"Demo only. Connect Supabase to enable real registration.",searchStatus:"Search will be available after the database is connected."},
 ru:{navAbout:"О проекте",navProfiles:"Анкеты",navSearch:"Поиск",login:"Войти",eyebrow:"Европа начинается со знакомства",hero1:"Встречайте людей.",hero2:"Находите своё.",heroDescription:"Пространство для искренних знакомств, общения и новых историй. Создайте профиль и начните знакомиться.",createProfile:"Создать анкету",browse:"Смотреть анкеты",withoutBorders:"Знакомства без границ",welcome:"Красивое пространство для настоящего общения.",respect:"Зарегистрируйтесь, заполните анкету и расскажите о себе. Уважайте других участников и не публикуйте чужие личные данные.",findMatch:"Найти знакомство",searchIntro:"Настройте поиск по интересам и месту проживания.",who:"Кого ищете",any:"Не важно",woman:"Женщину",man:"Мужчину",age:"Возраст от",country:"Страна",countryExample:"Например, Швейцария",search:"Найти",members:"Участники",membersIntro:"Примеры оформления анкет — реальные анкеты появятся после подключения базы данных.",exampleProfile:"Анкета-пример",europe18:"Европа · 18+",exampleDescription:"Здесь будет короткое описание участника.",demo:"Демо-профиль",like:"♡ Симпатия",yourMatch:"Ваше знакомство",yourCity:"Ваш город",afterRegistration:"После регистрации здесь будут отображаться анкеты.",newMeetings:"Новые встречи",newPeople:"Новые люди",filtersLater:"Поиск и фильтры заработают после настройки базы.",footer:"Уважение, безопасность и взаимность.",close:"Закрыть",password:"Пароль",passwordHint:"Не менее 6 символов",register:"Зарегистрироваться",createAccount:"Создать аккаунт",alreadyAccount:"Уже есть аккаунт? Войти",demoNotice:"Пока демонстрационный интерфейс. Для настоящего входа подключите Supabase и настройте таблицы базы данных.",authStatus:"Демо-режим. Для регистрации подключите Supabase.",searchStatus:"Поиск станет активным после подключения базы данных."},
@@ -36,12 +40,53 @@ it:{navAbout:"Chi siamo",navProfiles:"Profili",navSearch:"Cerca",login:"Accedi",
 };
 const language=document.getElementById('language'),modal=document.getElementById('authModal');let mode='login';
 function tr(key){return T[language.value][key]||T.en[key]||key}
-function applyLanguage(code){language.value=T[code]?code:'en';document.documentElement.lang=language.value;document.querySelectorAll('[data-i]').forEach(el=>{el.textContent=tr(el.dataset.i)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});updateAuth();if(document.getElementById('authStatus').dataset.shown==='yes')document.getElementById('authStatus').textContent=tr('authStatus')}
+function applyLanguage(code){language.value=T[code]?code:'en';document.documentElement.lang=language.value;document.querySelectorAll('[data-i]').forEach(el=>{el.textContent=tr(el.dataset.i)});document.querySelectorAll('[data-placeholder]').forEach(el=>{el.placeholder=tr(el.dataset.placeholder)});document.querySelectorAll('[data-aria]').forEach(el=>{el.setAttribute('aria-label',tr(el.dataset.aria))});updateAuth();}
 function updateAuth(){document.getElementById('modalTitle').textContent=tr(mode==='login'?'login':'createAccount');document.getElementById('authSubmit').textContent=tr(mode==='login'?'login':'register');document.getElementById('switchMode').textContent=tr(mode==='login'?'createAccount':'alreadyAccount')}
 function showAuth(m){mode=m;document.getElementById('authStatus').textContent='';document.getElementById('authStatus').dataset.shown='no';updateAuth();modal.classList.add('open')}
-language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
+language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
-document.getElementById('authForm').onsubmit=e=>{e.preventDefault();const status=document.getElementById('authStatus');status.dataset.shown='yes';status.textContent=tr('authStatus')};
+document.getElementById('authForm').onsubmit=async e=>{
+ e.preventDefault();
+ const status=document.getElementById('authStatus');
+ const submit=document.getElementById('authSubmit');
+ status.dataset.shown='yes'; status.textContent='Please wait…'; submit.disabled=true;
+ const email=document.getElementById('email').value.trim();
+ const password=document.getElementById('password').value;
+ try {
+   let result;
+   if(mode==='register') {
+     result=await db.auth.signUp({email,password});
+     if(!result.error && !result.data.session) {
+       status.textContent='Account created. Check your email to confirm your address, then sign in.';
+     } else if(!result.error) {
+       status.textContent='Account created and signed in.';
+       modal.classList.remove('open');
+     }
+   } else {
+     result=await db.auth.signInWithPassword({email,password});
+     if(!result.error) {
+       status.textContent='Signed in successfully.';
+       modal.classList.remove('open');
+       document.getElementById('openAuth').textContent='Sign out';
+     }
+   }
+   if(result.error) status.textContent=result.error.message;
+ } catch(err) { status.textContent='Connection error: '+err.message; }
+ finally { submit.disabled=false; }
+};
+document.getElementById('openAuth').addEventListener('click',async()=>{
+ const {data}=await db.auth.getSession();
+ if(data.session) {
+   await db.auth.signOut();
+   document.getElementById('openAuth').textContent=tr('login');
+ } else showAuth('login');
+});
+db.auth.onAuthStateChange((_event,session)=>{
+ if(session) document.getElementById('openAuth').textContent='Sign out';
+ else document.getElementById('openAuth').textContent=tr('login');
+});
+
 document.getElementById('filterBtn').onclick=()=>{document.getElementById('profiles').scrollIntoView({behavior:'smooth'});alert(tr('searchStatus'))};
-applyLanguage('en');
+document.getElementById('authHelp').textContent='Use your email address to register. You may need to confirm it by email.';
+applyLanguage('ru');
 </script></body></html>
