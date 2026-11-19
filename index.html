@@ -119,4 +119,24 @@ db.auth.onAuthStateChange((_event,session)=>{
 });
 applyLanguage('ru');
 loadProfiles();
+gender: data.gender,
+    birthdate: data.birthdate,
+    looking_for: data.looking_for
+  };
+
+  for (const [id, value] of Object.entries(fields)) {
+    const field = document.getElementById(id);
+    if (field && value != null) field.value = value;
+  }
+
+  await loadProfiles();
+}
+
+db.auth.onAuthStateChange((event, session) => {
+  if (session && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
+    setTimeout(restoreMyProfile, 0);
+  }
+});
+
+restoreMyProfile();
 </script></body></html>
