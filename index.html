@@ -101,7 +101,7 @@ function renderProfiles(rows){
 async function loadProfiles(){
  const root=document.getElementById('profiles');
  showProfileMessage(tr('loadingProfiles'));
- let query=db.from('profiles').select('id,username,country,city,bio,created_at').order('created_at',{ascending:false}).limit(60);
+ let query=db.from('public_profiles').select('id,username,country,city,bio,created_at').order('created_at',{ascending:false}).limit(60);
  const country=document.getElementById('country').value.trim();
  const city=document.getElementById('city').value.trim();
  if(country) query=query.ilike('country','%'+country+'%');
