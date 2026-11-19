@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Моя анкета — Smart Dating Europe</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0c0b09;color:#f5eedc;font:16px system-ui,sans-serif}main{max-width:650px;margin:35px auto;padding:25px;background:#191714;border:1px solid #b99449;border-radius:20px}h1{color:#e9c979}label{display:block;margin:15px 0 5px}input,select,textarea{display:block;width:100%;padding:12px;background:#0b0b0b;color:white;border:1px solid #9a7c42;border-radius:8px}button{background:#e9c979;color:#17120a;padding:13px 20px;border:0;border-radius:20px;margin-top:20px;font-weight:bold;cursor:pointer}a{color:#e9c979}#status{white-space:pre-wrap;margin-top:15px}img{max-width:180px;border-radius:10px;margin-top:10px}
+</style></head><body><main>
+<a href="index.html">← На главную</a><h1>Моя анкета</h1><p>Для зарегистрированных участников от 18 лет. Войдите на главной странице, затем откройте анкету.</p>
+<form id="profileForm">
+<label>Имя</label><input name="username" required maxlength="60">
+<label>Дата рождения</label><input name="birthdate" type="date" required>
+<label>Пол</label><select name="gender" required><option value="">Выберите</option><option value="man">Мужчина</option><option value="woman">Женщина</option><option value="other">Другое</option></select>
+<label>Страна</label><input name="country" required maxlength="80">
+<label>Город</label><input name="city" required maxlength="80">
+<label>Кого ищу</label><select name="looking_for" required><option value="">Выберите</option><option value="woman">Женщину</option><option value="man">Мужчину</option><option value="any">Неважно</option></select>
+<label>О себе</label><textarea name="biotext" rows="4" maxlength="1500"></textarea>
+<label>Ссылка на фотографию (https://)</label><input name="photo_url" type="url" placeholder="https://..."><small>Загрузка фото с компьютера будет добавлена после настройки хранилища Supabase.</small><div id="preview"></div>
+<button type="submit">Сохранить анкету</button></form><p id="status" role="status"></p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const db=window.supabase.createClient('https://lhxdfwgldecmilxaqpcp.supabase.co','sb_publishable_vktrlV800QX2YQ7Bqj5-lw_xcH5bT48');
+const form=document.getElementById('profileForm'),status=document.getElementById('status');
+let user=null;
+async function init(){
+ const {data:{user:u},error}=await db.auth.getUser();
+ if(error||!u){status.textContent='Сначала войдите в аккаунт на главной странице.';form.hidden=true;return}
+ user=u;
+ const {data,error:e}=await db.from('profiles').select('username,birthdate,gender,country,city,looking_for,biotext,photo_url').eq('id',u.id).maybeSingle();
+ if(e){status.textContent='Не удалось прочитать анкету: '+e.message;return}
+ if(data)Object.entries(data).forEach(([k,v])=>{if(form.elements[k])form.elements[k].value=v||''});
+}
+form.addEventListener('submit',async ev=>{
+ ev.preventDefault();
+ if(!user){status.textContent='Сначала войдите в аккаунт.';return}
+ const values=Object.fromEntries(new FormData(form).entries());
+ const age=(Date.now()-new Date(values.birthdate).getTime())/31557600000;
+ if(!Number.isFinite(age)||age<18){status.textContent='Регистрация доступна только с 18 лет.';return}
+ if(values.photo_url&&!values.photo_url.startsWith('https://')){status.textContent='Для фотографии нужна ссылка https://';return}
+ status.textContent='Сохраняем...';
+ const {error}=await db.from('profiles').upsert({id:user.id,...values},{onConflict:'id'});
+ status.textContent=error?'Ошибка сохранения: '+error.message+'\nПроверьте права доступа RLS в Supabase.':'Анкета сохранена!';
+});
+init();
+</script></body></html>
