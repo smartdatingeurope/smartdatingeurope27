@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html> -->
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0b"><title>Smart Dating Europe — Find Your Love</title>
 <style>
 :root{--bg:#090909;--panel:#141414;--panel2:#1c1b18;--gold:#d6b15e;--gold2:#f2d88d;--muted:#aaa49a;--line:#383126;--white:#f7f3e9}
@@ -89,6 +89,9 @@ function renderProfiles(rows){
  if(!rows || rows.length===0){showProfileMessage(tr('noProfiles'));return;}
  rows.forEach(profile=>{
    const card=document.createElement('article'); card.className='card';
+  
+card.dataset.profileId = profile.id;
+
    const portrait=document.createElement('div'); portrait.className='portrait'; portrait.textContent='♡';
    const body=document.createElement('div'); body.className='cardbody';
    const name=document.createElement('h3'); name.textContent=profile.username || 'Member';
@@ -121,5 +124,15 @@ applyLanguage('en');
 loadProfiles();
 
 
+
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('[data-profile-id]');
+  if (!card) return;
+
+  const name = card.querySelector('h3, h4, strong');
+  if (name) {
+    alert('Анкета: ' + name.textContent);
+  }
+});
 
 </script></body></html>
