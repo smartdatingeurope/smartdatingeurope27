@@ -40,6 +40,16 @@ function applyLanguage(code){language.value=T[code]?code:'en';document.documentE
 function updateAuth(){document.getElementById('modalTitle').textContent=tr(mode==='login'?'login':'createAccount');document.getElementById('authSubmit').textContent=tr(mode==='login'?'login':'register');document.getElementById('switchMode').textContent=tr(mode==='login'?'createAccount':'alreadyAccount')}
 function showAuth(m){mode=m;document.getElementById('authStatus').textContent='';document.getElementById('authStatus').dataset.shown='no';updateAuth();modal.classList.add('open')}
 language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
+ 
+document.getElementById('openRegister').onclick = async () => {
+  const { data } = await supabase.auth.getSession();
+  if (data.session) {
+    window.location.href = 'profile.html';
+  } else {
+    showAuth('register');
+  }
+};
+
 modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
 document.getElementById('authForm').onsubmit=async e=>{
  e.preventDefault();
