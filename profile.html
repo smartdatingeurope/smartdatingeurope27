@@ -23,6 +23,9 @@
   <p id="publicLocation"></p>
   <p id="publicAge"></p>
   <p id="publicBio"></p>
+  
+<a id="messageBtn" href="#" style="display:none;background:#d6b15e;color:#111;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:bold;">💌 Написать сообщение</a>
+
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -50,4 +53,13 @@ form.addEventListener('submit',async ev=>{
  status.textContent=error?'Ошибка сохранения: '+error.message+'\nПроверьте права доступа RLS в Supabase.':'Анкета сохранена!';
 });
 init();
+
+const receiverId = new URLSearchParams(window.location.search).get('id');
+const messageBtn = document.getElementById('messageBtn');
+
+if (receiverId && messageBtn) {
+  messageBtn.href = 'chat.html?to=' + encodeURIComponent(receiverId);
+  messageBtn.style.display = 'inline-block';
+}
+
 </script></body></html>
