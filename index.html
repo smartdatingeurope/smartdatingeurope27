@@ -131,7 +131,7 @@ document.addEventListener('click', function(e) {
 
   const name = card.querySelector('h3, h4, strong');
   if (name) {
-    alert('Анкета: ' + name.textContent);
+   window.location.href = 'profile.html?id=' + encodeURIComponent(card.dataset.profileId);
   }
 });
 
