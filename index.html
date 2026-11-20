@@ -22,7 +22,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:1
 <section class="section wrap" id="search"><h2 data-i="findMatch"></h2><p class="sub" data-i="searchIntro"></p><div class="panel filters"><div class="field"><label for="country" data-i="country"></label><input id="country" data-placeholder="countryExample"></div><div class="field"><label for="city" data-i="city"></label><input id="city" data-placeholder="cityExample"></div><button class="btn" id="filterBtn" data-i="search"></button></div></section>
 <section class="section wrap" id="people"><h2 data-i="members"></h2><p class="sub" data-i="membersIntro"></p><div class="grid" id="profiles" aria-live="polite"><p class="sub" data-i="loadingProfiles"></p></div></section></main><footer><div class="wrap">© 2026 Smart Dating Europe · <span data-i="footer"></span></div></footer>
 <div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
-<div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle"><div class="dialog"><button class="close" id="closeProfile" aria-label="Закрыть">×</button><h2 id="profileTitle"></h2><p class="meta" id="profileLocation"></p><p id="profileBio" style="white-space:pre-wrap;overflow-wrap:anywhere"></p></div></div>
+<div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle"><div class="dialog"><button class="close" id="closeProfile" aria-label="Закрыть">×</button><h2 id="profileTitle"></h2><p class="meta" id="profileLocation"></p><p id="profileBio" style="white-space:pre-wrap;overflow-wrap:anywhere"></p><a id="messageMember" class="btn" href="#" style="display:inline-block;text-decoration:none;margin-top:12px">Написать сообщение</a></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://lhxdfwgldecmilxaqpcp.supabase.co";
@@ -90,6 +90,10 @@ function openMemberProfile(profile){
  document.getElementById('profileTitle').textContent=profile.username||'Member';
  document.getElementById('profileLocation').textContent=[profile.city,profile.country].filter(Boolean).join(' · ')||'Europe';
  document.getElementById('profileBio').textContent=profile.bio||'Описание пока не добавлено.';
+ const messageLink=document.getElementById('messageMember');
+ const validId=typeof profile.id==='string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(profile.id);
+ messageLink.href=validId?'chat.html?to='+encodeURIComponent(profile.id):'#';
+ messageLink.style.display=validId?'inline-block':'none';
  profileModal.classList.add('open');
  document.getElementById('closeProfile').focus();
 }
