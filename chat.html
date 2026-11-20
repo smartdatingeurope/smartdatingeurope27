@@ -38,7 +38,7 @@ button:disabled{opacity:.5}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const params=new URLSearchParams(location.search);
-const receiver=params.get('to');
+const receiver=params.get('to') || params.get('id');
 const recipient=document.getElementById('recipient');
 const status=document.getElementById('status');
 const messages=document.getElementById('messages');
