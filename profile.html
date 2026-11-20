@@ -34,6 +34,51 @@ const db=window.supabase.createClient('https://lhxdfwgldecmilxaqpcp.supabase.co'
 const form=document.getElementById('profileForm'),status=document.getElementById('status');
 let user=null;
 async function init(){
+  
+const profileId = new URLSearchParams(location.search).get('id');
+
+if (profileId) {
+  const { data, error } = await db.from('profiles')
+    .select('id,username,birthdate,country,city,biotext,photo_url')
+    .eq('id', profileId)
+    .single();
+
+  if (error || !data) {
+    status.textContent = 'Анкета не найдена';
+    return;
+  }
+
+  document.querySelector('main').style.display = 'none';
+  const section = document.getElementById('publicProfile');
+  section.style.display = 'block';
+
+  document.getElementById('publicName').textContent = data.username || '';
+  document.getElementById('publicLocation').textContent =
+    [data.city, data.country].filter(Boolean).join(', ');
+  document.getElementById('publicBio').textContent = data.biotext || '';
+
+  if (data.birthdate) {
+    const today = new Date();
+    const born = new Date(data.birthdate);
+    let age = today.getFullYear() - born.getFullYear();
+    if (today.getMonth() < born.getMonth() ||
+       (today.getMonth() === born.getMonth() &&
+        today.getDate() < born.getDate())) age--;
+    document.getElementById('publicAge').textContent = age + ' лет';
+  }
+
+  if (data.photo_url) {
+    const photo = document.getElementById('publicPhoto');
+    photo.src = data.photo_url;
+    photo.style.display = 'block';
+  }
+
+  const btn = document.getElementById('messageBtn');
+  btn.href = 'chat.html?to=' + encodeURIComponent(profileId);
+  btn.style.display = 'inline-block';
+  return;
+}
+
  const {data:{user:u},error}=await db.auth.getUser();
  if(error||!u){status.textContent='Сначала войдите в аккаунт на главной странице.';form.hidden=true;return}
  user=u;
