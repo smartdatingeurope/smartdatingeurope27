@@ -16,69 +16,12 @@
 <label>Ссылка на фотографию (https://)</label><input name="photo_url" type="url" placeholder="https://..."><small>Загрузка фото с компьютера будет добавлена после настройки хранилища Supabase.</small><div id="preview"></div>
 <button type="submit">Сохранить анкету</button></form><p id="status" role="status"></p>
 </main>
-<section id="publicProfile" style="display:none;max-width:650px;margin:30px auto;padding:25px;color:#f5eedc;background:#171717;border:1px solid #d6b15e;border-radius:18px">
-  <a href="index.html" style="color:#d6b15e">← Назад к анкетам</a>
-  <h1 id="publicName"></h1>
-  <img id="publicPhoto" alt="Фото участника" style="display:none;width:100%;max-height:400px;object-fit:cover;border-radius:15px">
-  <p id="publicLocation"></p>
-  <p id="publicAge"></p>
-  <p id="publicBio"></p>
-  
-<a id="messageBtn" href="#" style="display:none;background:#d6b15e;color:#111;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:bold;">💌 Написать сообщение</a>
-
-</section>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const db=window.supabase.createClient('https://lhxdfwgldecmilxaqpcp.supabase.co','sb_publishable_vktrlV800QX2YQ7Bqj5-lw_xcH5bT48');
 const form=document.getElementById('profileForm'),status=document.getElementById('status');
 let user=null;
 async function init(){
-  
-const profileId = new URLSearchParams(location.search).get('id');
-
-if (profileId) {
-  const { data, error } = await db.from('profiles')
-    .select('id,username,birthdate,country,city,biotext,photo_url')
-    .eq('id', profileId)
-    .single();
-
-  if (error || !data) {
-    status.textContent = 'Анкета не найдена';
-    return;
-  }
-
-  document.querySelector('main').style.display = 'none';
-  const section = document.getElementById('publicProfile');
-  section.style.display = 'block';
-
-  document.getElementById('publicName').textContent = data.username || '';
-  document.getElementById('publicLocation').textContent =
-    [data.city, data.country].filter(Boolean).join(', ');
-  document.getElementById('publicBio').textContent = data.biotext || '';
-
-  if (data.birthdate) {
-    const today = new Date();
-    const born = new Date(data.birthdate);
-    let age = today.getFullYear() - born.getFullYear();
-    if (today.getMonth() < born.getMonth() ||
-       (today.getMonth() === born.getMonth() &&
-        today.getDate() < born.getDate())) age--;
-    document.getElementById('publicAge').textContent = age + ' лет';
-  }
-
-  if (data.photo_url) {
-    const photo = document.getElementById('publicPhoto');
-    photo.src = data.photo_url;
-    photo.style.display = 'block';
-  }
-
-  const btn = document.getElementById('messageBtn');
-  btn.href = 'chat.html?to=' + encodeURIComponent(profileId);
-  btn.style.display = 'inline-block';
-  return;
-}
-
  const {data:{user:u},error}=await db.auth.getUser();
  if(error||!u){status.textContent='Сначала войдите в аккаунт на главной странице.';form.hidden=true;return}
  user=u;
@@ -98,13 +41,4 @@ form.addEventListener('submit',async ev=>{
  status.textContent=error?'Ошибка сохранения: '+error.message+'\nПроверьте права доступа RLS в Supabase.':'Анкета сохранена!';
 });
 init();
-
-const receiverId = new URLSearchParams(window.location.search).get('id');
-const messageBtn = document.getElementById('messageBtn');
-
-if (receiverId && messageBtn) {
-  messageBtn.href = 'chat.html?to=' + encodeURIComponent(receiverId);
-  messageBtn.style.display = 'inline-block';
-}
-
 </script></body></html>

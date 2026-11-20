@@ -17,12 +17,12 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:#938b7c;font-size:1
 @media(max-width:480px){.grid{grid-template-columns:1fr}.portrait{height:190px}.section h2{font-size:30px}.filters{grid-template-columns:1fr}.brand{font-size:14px}}
 </style></head><body>
 <header><div class="wrap nav"><div class="brand">SMART DATING EUROPE<span>MEET • CONNECT • DISCOVER</span></div><nav><a href="#how" data-i="navAbout"></a><a href="#people" data-i="navProfiles"></a><a href="#search" data-i="navSearch"></a></nav><select id="language" aria-label="Language"><option value="en">English</option><option value="ru">Русский</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="it">Italiano</option></select><button class="btn small" id="openAuth" data-i="login">Войти</button></div></header>
-<main><section class="hero wrap"><div class="eyebrow" data-i="eyebrow"></div><h1><span data-i="hero1"></span><br><em data-i="hero2"></em></h1><p data-i="heroDescription"></p><div class="actions"><a class="btn" id="openRegister" href="profile.html" data-i="createProfile" style="text-decoration:none">Создать анкету</a><a class="btn ghost" href="#people" data-i="browse"></a></div></section>
+<main><section class="hero wrap"><div class="eyebrow" data-i="eyebrow"></div><h1><span data-i="hero1"></span><br><em data-i="hero2"></em></h1><p data-i="heroDescription"></p><div class="actions"><a class="btn" id="openRegister" href="profile.html" data-i="createProfile" style="text-decoration:none">Создать анкету</a><a class="btn ghost" href="#people" data-i="browse"></a><a class="btn ghost" href="wallet.html" style="text-decoration:none">🎁 SDE · Подарки</a></div></section>
 <section class="section wrap" id="how"><div class="eyebrow">Smart Dating Europe</div><h2 data-i="withoutBorders"></h2><p class="sub" data-i="welcome"></p><div class="panel"><p style="margin:0;color:#c9c0b0" data-i="respect"></p></div></section>
 <section class="section wrap" id="search"><h2 data-i="findMatch"></h2><p class="sub" data-i="searchIntro"></p><div class="panel filters"><div class="field"><label for="country" data-i="country"></label><input id="country" data-placeholder="countryExample"></div><div class="field"><label for="city" data-i="city"></label><input id="city" data-placeholder="cityExample"></div><button class="btn" id="filterBtn" data-i="search"></button></div></section>
 <section class="section wrap" id="people"><h2 data-i="members"></h2><p class="sub" data-i="membersIntro"></p><div class="grid" id="profiles" aria-live="polite"><p class="sub" data-i="loadingProfiles"></p></div></section></main><footer><div class="wrap">© 2026 Smart Dating Europe · <span data-i="footer"></span></div></footer>
-<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
-<div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle"><div class="dialog"><button class="close" id="closeProfile" aria-label="Закрыть">×</button><h2 id="profileTitle"></h2><p class="meta" id="profileLocation"></p><p id="profileBio" style="white-space:pre-wrap;overflow-wrap:anywhere"></p><a id="messageMember" class="btn" href="#" style="display:inline-block;text-decoration:none;margin-top:12px">Написать сообщение</a></div></div>
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="dialog"><button class="close" id="closeAuth" data-aria="close" aria-label="Close">×</button><h2 id="modalTitle"></h2><form id="authForm"><div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label for="password" data-i="password"></label><input id="password" type="password" required minlength="6" data-placeholder="passwordHint"></div><button class="btn" type="submit" id="authSubmit"></button></form><button class="btn ghost" id="switchMode" style="width:100%;margin-top:10px"></button><button class="btn ghost" type="button" id="forgotPassword" style="width:100%;margin-top:10px">Забыли пароль?</button><div class="status" id="authStatus" role="status"></div><div class="notice" data-i="demoNotice"></div></div></div>
+<div class="modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle"><div class="dialog"><button class="close" id="closeProfile" aria-label="Закрыть">×</button><h2 id="profileTitle"></h2><p class="meta" id="profileLocation"></p><p id="profileBio" style="white-space:pre-wrap;overflow-wrap:anywhere"></p><a id="messageMember" class="btn" href="#" style="display:inline-block;text-decoration:none;margin-top:12px">Написать сообщение</a><a id="giftMember" class="btn ghost" href="#" style="display:inline-block;text-decoration:none;margin-top:12px">🎁 Подарить</a></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://lhxdfwgldecmilxaqpcp.supabase.co";
@@ -71,6 +71,14 @@ document.getElementById('authForm').onsubmit=async e=>{
  } catch(err) { status.textContent='Connection error: '+err.message; }
  finally { submit.disabled=false; }
 };
+document.getElementById('forgotPassword').addEventListener('click',async()=>{
+  const email=document.getElementById('email').value.trim();const status=document.getElementById('authStatus');
+  if(!email){status.textContent='Введите email выше, затем нажмите «Забыли пароль?». ';return;}
+  if(!db){status.textContent='Сервис недоступен.';return;}
+  const redirectTo=new URL('reset-password.html',location.href).href;
+  const {error}=await db.auth.resetPasswordForEmail(email,{redirectTo});
+  status.textContent=error?error.message:'Если адрес зарегистрирован, проверьте почту и папку «Спам».';
+});
 document.getElementById('openAuth').addEventListener('click',async()=>{
  if(!db){showAuth('login');document.getElementById('authStatus').textContent='Сервис входа временно недоступен. Попробуйте позже.';return;}
  const {data}=await db.auth.getSession();
@@ -94,6 +102,7 @@ function openMemberProfile(profile){
  const validId=typeof profile.id==='string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(profile.id);
  messageLink.href=validId?'chat.html?to='+encodeURIComponent(profile.id):'#';
  messageLink.style.display=validId?'inline-block':'none';
+  const giftLink=document.getElementById('giftMember');giftLink.href=validId?'wallet.html?to='+encodeURIComponent(profile.id):'#';giftLink.style.display=validId?'inline-block':'none';
  profileModal.classList.add('open');
  document.getElementById('closeProfile').focus();
 }
