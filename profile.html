@@ -16,6 +16,15 @@
 <label>Ссылка на фотографию (https://)</label><input name="photo_url" type="url" placeholder="https://..."><small>Загрузка фото с компьютера будет добавлена после настройки хранилища Supabase.</small><div id="preview"></div>
 <button type="submit">Сохранить анкету</button></form><p id="status" role="status"></p>
 </main>
+<section id="publicProfile" style="display:none;max-width:650px;margin:30px auto;padding:25px;color:#f5eedc;background:#171717;border:1px solid #d6b15e;border-radius:18px">
+  <a href="index.html" style="color:#d6b15e">← Назад к анкетам</a>
+  <h1 id="publicName"></h1>
+  <img id="publicPhoto" alt="Фото участника" style="display:none;width:100%;max-height:400px;object-fit:cover;border-radius:15px">
+  <p id="publicLocation"></p>
+  <p id="publicAge"></p>
+  <p id="publicBio"></p>
+</section>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const db=window.supabase.createClient('https://lhxdfwgldecmilxaqpcp.supabase.co','sb_publishable_vktrlV800QX2YQ7Bqj5-lw_xcH5bT48');
