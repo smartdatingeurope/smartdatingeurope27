@@ -42,7 +42,7 @@ function showAuth(m){mode=m;document.getElementById('authStatus').textContent=''
 language.addEventListener('change',()=>applyLanguage(language.value));document.getElementById('openAuth').onclick=()=>showAuth('login');document.getElementById('openRegister').onclick=()=>showAuth('register');document.getElementById('closeAuth').onclick=()=>modal.classList.remove('open');document.getElementById('switchMode').onclick=()=>showAuth(mode==='login'?'register':'login');
  
 document.getElementById('openRegister').onclick = async () => {
-  const { data } = await window.supabaseClient.auth.getSession()
+  const { data } = awaitdb.auth.getSession()
   if (data.session) {
     window.location.href = 'profile.html';
   } else {
