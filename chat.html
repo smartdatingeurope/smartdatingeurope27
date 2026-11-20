@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Личные сообщения — Smart Dating Europe</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b12;color:#f5eedc;font:16px Arial,sans-serif}
+main{max-width:760px;margin:35px auto;padding:22px}
+a{color:#e9c36a}
+h1{color:#e9c36a}
+#messages{height:380px;overflow-y:auto;background:#191923;border:1px solid #665633;border-radius:14px;padding:15px;margin:20px 0}
+.msg{padding:12px;margin:9px 0;border-radius:12px;background:#30303d;max-width:85%;overflow-wrap:anywhere;white-space:pre-wrap}
+.mine{background:#665020;margin-left:auto}
+small{display:block;color:#ddd;font-size:11px;margin-top:7px}
+form{display:flex;gap:10px}
+input{flex:1;min-width:0;padding:14px;background:#222;color:white;border:1px solid #777;border-radius:9px}
+button{padding:12px 18px;background:#e9c36a;color:#171717;border:0;border-radius:9px;cursor:pointer}
+button:disabled{opacity:.5}
+#status{color:#e9c36a}
+</style>
+</head>
+<body>
+<main>
+<a href="index.html">← На главную</a>
+<h1>❤️ Личные сообщения</h1>
+<h2 id="recipient">Загрузка...</h2>
+<p id="status"></p>
+<div id="messages" aria-live="polite"></div>
+<form id="chatForm">
+<input id="message" maxlength="5000" placeholder="Напишите сообщение..." required>
+<button id="send" type="submit">Отправить</button>
+</form>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const params=new URLSearchParams(location.search);
+const receiver=params.get('id');
+const recipient=document.getElementById('recipient');
+const status=document.getElementById('status');
+const messages=document.getElementById('messages');
+const form=document.getElementById('chatForm');
+const input=document.getElementById('message');
+const send=document.getElementById('send');
+
+let db,user,refreshTimer;
+
+function setStatus(text){status.textContent=text}
+
+async function init(){
+  try{
+    if(!receiver || !/^[0-9a-f-]{36}$/i.test(receiver)){
+      throw Error('Не указан получатель.');
+    }
+
+    // Вставь сюда URL и publishable key
+    // из существующего index.html.
+    const SUPABASE_URL='PASTE_SUPABASE_URL';
+    const SUPABASE_KEY='PASTE_PUBLISHABLE_KEY';
+
+    if(SUPABASE_URL.startsWith('PASTE_') ||
+       SUPABASE_KEY.startsWith('PASTE_')){
+      throw Error('Нужно подключить Supabase.');
+    }
+
+    db=window.supabase.createClient(
+      SUPABASE_URL,SUPABASE_KEY
+    );
+
+    const {data,error}=await db.auth.getUser();
+    if(error || !data.user){
+      throw Error('Сначала войдите в аккаунт на главной странице.');
+    }
+    user=data.user;
+
+    if(user.id===receiver){
+      throw Error('Нельзя писать самому себе.');
+    }
+
+    const {data:profile}=await db
+      .from('profiles')
+      .select('username')
+      .eq('id',receiver)
+      .maybeSingle();
+
+    recipient.textContent='Чат: '+(profile?.username || 'Участник');
+
+    await loadMessages();
+    refreshTimer=setInterval(loadMessages,5000);
+    setStatus('');
+    input.disabled=false;
+    send.disabled=false;
+  }catch(e){
+    recipient.textContent='Чат недоступен';
+    setStatus(e.message);
+  }
+}
+
+async function loadMessages(){
+  if(!db || !user)return;
+
+  const {data,error}=await db
+    .from('messages')
+    .select('id,sender_id,receiver_id,message,created_at')
+    .or(
+      `and(sender_id.eq.${user.id},receiver_id.eq.${receiver}),`+
+      `and(sender_id.eq.${receiver},receiver_id.eq.${user.id})`
+    )
+    .order('created_at',{ascending:true})
+    .limit(200);
+
+  if(error){
+    setStatus('Ошибка загрузки: '+error.message);
+    return;
+  }
+
+  const nearBottom=messages.scrollHeight-
+    messages.scrollTop-messages.clientHeight<80;
+
+  messages.replaceChildren();
+
+  for(const item of data){
+    const div=document.createElement('div');
+    div.className='msg'+
+      (item.sender_id===user.id?' mine':'');
+
+    const content=document.createElement('div');
+    content.textContent=item.message;
+
+    const time=document.createElement('small');
+    time.textContent=new Date(item.created_at)
+      .toLocaleString();
+
+    div.append(content,time);
+    messages.appendChild(div);
+  }
+
+  if(nearBottom)messages.scrollTop=messages.scrollHeight;
+}
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(!db || !user)return;
+
+  const message=input.value.trim();
+  if(!message)return;
+
+  send.disabled=true;
+  const {error}=await db.from('messages').insert({
+    sender_id:user.id,
+    receiver_id:receiver,
+    message
+  });
+
+  if(error){
+    setStatus('Ошибка отправки: '+error.message);
+  }else{
+    input.value='';
+    setStatus('');
+    await loadMessages();
+    messages.scrollTop=messages.scrollHeight;
+  }
+  send.disabled=false;
+});
+
+input.disabled=true;
+send.disabled=true;
+init();
+</script>
+</body>
+</html>
