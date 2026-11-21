@@ -1,4 +1,4 @@
-<!doctype html>
+f<!doctype html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Smart Dating Europe — Luxury Preview</title>
 <style>
@@ -141,7 +141,22 @@ function toggleWallet(){document.getElementById('payments').classList.toggle('hi
 function selectCurrency(c){document.getElementById('payments').classList.remove('hidden');document.getElementById('currency').value=c;updateQuote()}
 function updateQuote(){const n=Number(document.getElementById('package').value), c=document.getElementById('currency').value;document.getElementById('quote').textContent='Пакет: '+n.toLocaleString('ru-RU')+' SDE. Расчётная базовая цена: '+(n/10).toFixed(2)+' EUR. '+(c==='EUR'?'': 'Оплата в '+c+': точный курс и комиссии будут показаны после подключения провайдера.');}
 function demo(s){alert('Предпросмотр Smart Dating Europe\n\n'+s)}
-function nav(b,n){document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(n==='Знакомства'){document.getElementById('heading').textContent='Знакомства по всей Европе 💕'}else{demo('Раздел «'+n+'» появится в рабочей версии.');document.getElementById('heading').textContent='Знакомства по всей Европе 💕'}}
+
+function nav(b,n){
+  if(n==='Мой профиль'){
+    window.location.href='profile.html';
+    return;
+  }
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  if(n==='Знакомства'){
+    document.getElementById('heading').textContent='Знакомства по всей Европе 💕';
+  }else{
+    demo('Раздел «'+n+'» появится в рабочей версии.');
+    document.getElementById('heading').textContent='Знакомства по всей Европе 💕';
+  }
+}
+
 const gold='<defs><linearGradient id="au" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff7c3"/><stop offset=".42" stop-color="#dba849"/><stop offset=".75" stop-color="#8c511e"/><stop offset="1" stop-color="#ffe9a2"/></linearGradient><linearGradient id="ice" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".4" stop-color="#8feaff"/><stop offset=".7" stop-color="#4b83d5"/><stop offset="1" stop-color="#f6fbff"/></linearGradient></defs>';
 const shapes=[
 '<polygon points="50,10 78,34 66,76 50,93 34,76 22,34" fill="url(#ice)" stroke="#e6ffff" stroke-width="3"/><path d="M22 34h56M34 76l16-42 16 42M50 10v24" fill="none" stroke="#fff" stroke-width="2"/>',
